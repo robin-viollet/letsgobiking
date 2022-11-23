@@ -8,8 +8,8 @@
     <ProjectGuid>{84AA84EF-6FF5-4266-BA7B-3F21C16B5A5B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RoutingServerBis</RootNamespace>
-    <AssemblyName>RoutingServerBis</AssemblyName>
+    <RootNamespace>RoutingServer</RootNamespace>
+    <AssemblyName>RoutingServer</AssemblyName>
     <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <StartArguments>/client:"WcfTestClient.exe"</StartArguments>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -42,6 +42,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -70,10 +71,14 @@
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Nominatim.cs" />
+    <Compile Include="JCDecaux.cs" />
+    <Compile Include="RequestHelper.cs" />
     <Compile Include="Contract.cs" />
     <Compile Include="IServices.cs" />
     <Compile Include="Place.cs" />

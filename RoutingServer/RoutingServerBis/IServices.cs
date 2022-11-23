@@ -22,13 +22,13 @@ namespace RoutingServer
     public class Location
     {
         [DataMember]
-        private String street { get; set; }
+        public String street { get; set; }
         [DataMember]
-        private String city { get; set; }
+        public String city { get; set; }
         [DataMember]
-        private String country { get; set; }
+        public String country { get; set; }
         [DataMember]
-        private String postalCode { get; set; }
+        public String postalCode { get; set; }
 
         public Location(String street, String city, String country, String postalCode)
         {
