@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RoutingServer
 {
-    internal class Program
+    /*internal class Program
     {
         static void Main(string[] args)
         {
@@ -56,7 +56,7 @@ namespace RoutingServer
                 Console.WriteLine("Message :{0} ", e.Message);
             }
         }
-    }
+    }*/
 
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
     public class Server : IServices
