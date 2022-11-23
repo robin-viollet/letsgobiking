@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.IO;
+using System.Web;
 
 namespace RoutingServer
 {
@@ -22,21 +23,34 @@ namespace RoutingServer
 
                 List<Contract> contracts = restClient.GetAllContracts().Result;
                 Console.WriteLine("Nombre de contrat : " + contracts.Count);
-                
-                foreach(Contract c in contracts)
+
+                foreach (Contract c in contracts)
                 {
-                    Console.WriteLine(c.name);
+                    Console.WriteLine("Contract name : " + c.name + "\nCities : ");
+                    if (c.cities == null) continue;
+                    for (int i = 0; i < c.cities.Length; i++)
+                    {
+                        Console.WriteLine(c.cities[i]);
+                    }
+                    Console.WriteLine("\n");
                 }
+
+                Console.ReadLine();
 
                 Contract selectedContract = contracts.Last<Contract>();
 
                 List<Station> stations = restClient.GetAllStations(selectedContract).Result;
                 Console.WriteLine("Nombre de station avec le contrat " + selectedContract.name + " : " + stations.Count);
 
-                foreach(Station station in stations)
+                foreach (Station station in stations)
                 {
                     Console.WriteLine(station.name);
                 }
+
+                Console.ReadLine();
+
+                Place place = restClient.getPlace("16 bis rue victor rougier", "Le Beausset", "France", "83330").Result;
+                Console.WriteLine("Longitude = " + place.lon + " | Latitude = " + place.lat);
 
                 Console.ReadLine();
             }
@@ -52,9 +66,15 @@ namespace RoutingServer
     {
 
         // HttpClient is intended to be instantiated once per application, rather than per-use. See Remarks.
-        readonly HttpClient client = new HttpClient();
+        readonly HttpClient client;
 
-        String apiKey = "ac8828262f441bebc10d8f59f3aa109399f6f66b";
+        static String apiKey = "ac8828262f441bebc10d8f59f3aa109399f6f66b";
+
+        public RestClient()
+        {
+            client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+        }
 
         public async Task<List<Contract>> GetAllContracts()
         {
@@ -78,6 +98,30 @@ namespace RoutingServer
 
             return JsonSerializer.Deserialize<List<Station>>(responseBody);
         }
+
+
+        public async Task<Place> getPlace(String street, String city, String country, String postalCode)
+        {
+            street = System.Web.HttpUtility.UrlEncode(street);
+            city = System.Web.HttpUtility.UrlEncode(city);
+            country = System.Web.HttpUtility.UrlEncode(country);
+            postalCode = System.Web.HttpUtility.UrlEncode(postalCode);
+
+            String url = "https://nominatim.openstreetmap.org/?format=json&limit=1&street=" + street + "&city=" + city + "&country=" + country + "&postalcode=" + postalCode;
+
+            Console.WriteLine(url);
+
+            HttpResponseMessage response = await this.client.GetAsync(url);
+
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine($"Response: {responseBody}");
+
+            return JsonSerializer.Deserialize<List<Place>>(responseBody)[0];
+        }
+
 
         
     }
