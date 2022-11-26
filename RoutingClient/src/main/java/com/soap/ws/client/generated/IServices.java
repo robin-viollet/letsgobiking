@@ -28,13 +28,13 @@ public interface IServices {
      * @param startLocation
      * @param endLocation
      * @return
-     *     returns com.soap.ws.client.generated.Itinerary
+     *     returns com.soap.ws.client.generated.MultipleCheckpointsItinary
      */
     @WebMethod(operationName = "GetBestPath", action = "http://tempuri.org/IServices/GetBestPath")
     @WebResult(name = "GetBestPathResult", targetNamespace = "http://tempuri.org/")
     @RequestWrapper(localName = "GetBestPath", targetNamespace = "http://tempuri.org/", className = "com.soap.ws.client.generated.GetBestPath")
     @ResponseWrapper(localName = "GetBestPathResponse", targetNamespace = "http://tempuri.org/", className = "com.soap.ws.client.generated.GetBestPathResponse")
-    public Itinerary getBestPath(
+    public MultipleCheckpointsItinary getBestPath(
         @WebParam(name = "startLocation", targetNamespace = "http://tempuri.org/")
         Location startLocation,
         @WebParam(name = "endLocation", targetNamespace = "http://tempuri.org/")

@@ -8,7 +8,7 @@ package com.soc.testwsclient;
 import com.soap.ws.client.generated.IServices;
 import com.soap.ws.client.generated.Location;
 import com.soap.ws.client.generated.ObjectFactory;
-import com.soap.ws.client.generated.Server;
+import com.soap.ws.client.generated.ServicesProvider;
 
 /**
  *
@@ -18,7 +18,7 @@ public class RoutingClient {
 
     public static void main(String[] args) {
         System.out.println("Hello World! we are going to test a SOAP client written in Java");
-        Server server = new Server();
+        ServicesProvider server = new ServicesProvider();
         IServices serverServices = server.getBasicHttpBindingIServices();
         
         ObjectFactory objectFactory = new  ObjectFactory();
@@ -35,6 +35,6 @@ public class RoutingClient {
         endLocation.setCity(objectFactory.createString("Mulhouse"));
         endLocation.setCountry(objectFactory.createString("France"));
         
-        System.out.println(serverServices.getBestPath(startLocation, endLocation).getType().getValue());
+        System.out.println(serverServices.getBestPath(startLocation, endLocation).toString());
     }
 }

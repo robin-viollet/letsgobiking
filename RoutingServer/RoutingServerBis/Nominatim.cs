@@ -1,5 +1,4 @@
-﻿using Microsoft.SqlServer.Server;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +24,7 @@ namespace RoutingServer
                 { "postalcode", location.postalCode }
             };
 
-            return base.SendRequest<List<Place>>(keysAndValues: keyValuePairs)[0];
+            return base.SendGetRequest<List<Place>>(keysAndValues: keyValuePairs)[0];
         }
     }
 }

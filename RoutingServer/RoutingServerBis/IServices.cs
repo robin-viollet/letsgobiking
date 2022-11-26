@@ -12,7 +12,10 @@ namespace RoutingServer
     public interface IServices
     {
         [OperationContract]
-        Itinerary GetBestPath(Location startLocation, Location endLocation);
+        MultipleCheckpointsItinary GetBestPath(Location startLocation, Location endLocation);
+
+        /*[OperationContract]
+        Itinerary GetBestPath(Location startLocation, Location endLocation);*/
     }
 
     // Utilisez un contrat de données comme indiqué dans l'exemple ci-après pour ajouter les types composites aux opérations de service.
@@ -37,6 +40,11 @@ namespace RoutingServer
             this.country = country;
             this.postalCode = postalCode;
         }
+
+        public override String ToString()
+        {
+            return this.street + " | " + this.city + " | " + this.country + " | " + this.postalCode; 
+        }
     }
 
     [DataContract]
@@ -50,6 +58,32 @@ namespace RoutingServer
         public List<double> bbox { get; set; }
         [DataMember]
         public Metadata metadata { get; set; }
+    }
+
+    [DataContract]
+    public class MultipleCheckpointsItinary
+    {
+        [DataMember]
+        public List<Route> routes { get; set; }
+        [DataMember]
+        public List<double> bbox { get; set; }
+        [DataMember]
+        public Metadata metadata { get; set; }
+    }
+
+    [DataContract]
+    public class Route
+    {
+        [DataMember]
+        public Summary summary { get; set; }
+        [DataMember]
+        public List<Segment> segments { get; set; }
+        [DataMember]
+        public List<double> bbox { get; set; }
+        [DataMember]
+        public string geometry { get; set; }
+        [DataMember]
+        public List<int> way_points { get; set; }
     }
 
     [DataContract]
@@ -128,7 +162,7 @@ namespace RoutingServer
         [DataMember]
         public double distance { get; set; }
         [DataMember]
-        public int duration { get; set; }
+        public double duration { get; set; }
         [DataMember]
         public List<Step> steps { get; set; }
     }
@@ -156,8 +190,7 @@ namespace RoutingServer
         [DataMember]
         public double distance { get; set; }
         [DataMember] 
-        public int duration { get; set; }
+        public double duration { get; set; }
     }
-
 
 }

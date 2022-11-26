@@ -19,8 +19,9 @@ C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.csproj.AssemblyReference.cache
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.csproj.CoreCompileInputs.cache
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.csproj.CopyComplete
-C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServer.dll.config
-C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServer.dll
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServer.pdb
-C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.dll
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.pdb
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServer.exe.config
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServer.exe
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.csproj.SuggestedBindingRedirects.cache
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.exe

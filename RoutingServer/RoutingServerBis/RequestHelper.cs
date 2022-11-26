@@ -12,9 +12,9 @@ namespace RoutingServer
 {
     internal class RequestHelper
     {
-        private readonly HttpClient client;
-        private readonly String api_address;
-        private readonly String apiKeyAndValue = null;
+        protected readonly HttpClient client;
+        protected readonly String api_address;
+        protected readonly String apiKeyAndValue = null;
 
         public RequestHelper(String api_address)
         {
@@ -27,14 +27,14 @@ namespace RoutingServer
             this.apiKeyAndValue = apiKey + "=" + apiValue;
         }
 
-        public T SendRequest<T>(String service = "", Dictionary<String, String> keysAndValues = null)
+        protected T SendGetRequest<T>(String service = "", Dictionary<String, String> keysAndValues = null)
         {
             String request = this.api_address;
             request += "/" + service + "?";
 
             if(this.apiKeyAndValue != null)
             {
-                request += this.apiKeyAndValue;
+                request += this.apiKeyAndValue + "&";
             }
 
             if(keysAndValues!= null)
@@ -44,10 +44,25 @@ namespace RoutingServer
                     request += entry.Key + "=" + HttpUtility.UrlEncode(entry.Value) + "&";
                 }
             }
+            Console.WriteLine("Send request : " + request);
 
             HttpResponseMessage response = this.client.GetAsync(request).Result;
 
+            Console.WriteLine("Status code : " + response.StatusCode);
             response.EnsureSuccessStatusCode();
+            
+            Console.WriteLine("Response received : " + response.Content.ReadAsStringAsync().Result);
+
+            return JsonSerializer.Deserialize<T>(response.Content.ReadAsStringAsync().Result);
+        }
+
+        protected T SendPostRequest<T>(HttpRequestMessage httpRequestMessage)
+        {
+            HttpResponseMessage response = this.client.SendAsync(httpRequestMessage).Result;
+
+            response.EnsureSuccessStatusCode();
+
+            Console.WriteLine(response.Content.ReadAsStringAsync().Result);
 
             return JsonSerializer.Deserialize<T>(response.Content.ReadAsStringAsync().Result);
         }

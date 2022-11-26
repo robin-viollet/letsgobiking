@@ -29,19 +29,17 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _Location_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Location");
-    private final static QName _Itinerary_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Itinerary");
-    private final static QName _ArrayOfFeature_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "ArrayOfFeature");
-    private final static QName _Feature_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Feature");
-    private final static QName _Geometry_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Geometry");
-    private final static QName _Properties_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Properties");
+    private final static QName _MultipleCheckpointsItinary_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "MultipleCheckpointsItinary");
+    private final static QName _Metadata_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Metadata");
+    private final static QName _Engine_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Engine");
+    private final static QName _Query_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Query");
+    private final static QName _ArrayOfRoute_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "ArrayOfRoute");
+    private final static QName _Route_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Route");
     private final static QName _ArrayOfSegment_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "ArrayOfSegment");
     private final static QName _Segment_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Segment");
     private final static QName _ArrayOfStep_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "ArrayOfStep");
     private final static QName _Step_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Step");
     private final static QName _Summary_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Summary");
-    private final static QName _Metadata_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Metadata");
-    private final static QName _Engine_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Engine");
-    private final static QName _Query_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Query");
     private final static QName _ArrayOfdouble_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfdouble");
     private final static QName _ArrayOfArrayOfdouble_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfArrayOfdouble");
     private final static QName _ArrayOfint_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfint");
@@ -69,6 +67,14 @@ public class ObjectFactory {
     private final static QName _GetBestPathStartLocation_QNAME = new QName("http://tempuri.org/", "startLocation");
     private final static QName _GetBestPathEndLocation_QNAME = new QName("http://tempuri.org/", "endLocation");
     private final static QName _GetBestPathResponseGetBestPathResult_QNAME = new QName("http://tempuri.org/", "GetBestPathResult");
+    private final static QName _StepInstruction_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "instruction");
+    private final static QName _StepName_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "name");
+    private final static QName _StepWayPoints_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "way_points");
+    private final static QName _SegmentSteps_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "steps");
+    private final static QName _RouteBbox_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "bbox");
+    private final static QName _RouteGeometry_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "geometry");
+    private final static QName _RouteSegments_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "segments");
+    private final static QName _RouteSummary_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "summary");
     private final static QName _QueryCoordinates_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "coordinates");
     private final static QName _QueryFormat_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "format");
     private final static QName _QueryProfile_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "profile");
@@ -77,18 +83,8 @@ public class ObjectFactory {
     private final static QName _MetadataEngine_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "engine");
     private final static QName _MetadataQuery_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "query");
     private final static QName _MetadataService_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "service");
-    private final static QName _StepInstruction_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "instruction");
-    private final static QName _StepName_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "name");
-    private final static QName _StepWayPoints_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "way_points");
-    private final static QName _SegmentSteps_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "steps");
-    private final static QName _PropertiesSegments_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "segments");
-    private final static QName _PropertiesSummary_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "summary");
-    private final static QName _GeometryType_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "type");
-    private final static QName _FeatureBbox_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "bbox");
-    private final static QName _FeatureGeometry_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "geometry");
-    private final static QName _FeatureProperties_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "properties");
-    private final static QName _ItineraryFeatures_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "features");
-    private final static QName _ItineraryMetadata_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "metadata");
+    private final static QName _MultipleCheckpointsItinaryMetadata_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "metadata");
+    private final static QName _MultipleCheckpointsItinaryRoutes_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "routes");
     private final static QName _LocationCity_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "city");
     private final static QName _LocationCountry_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "country");
     private final static QName _LocationPostalCode_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "postalCode");
@@ -126,43 +122,51 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Itinerary }
+     * Create an instance of {@link MultipleCheckpointsItinary }
      * 
      */
-    public Itinerary createItinerary() {
-        return new Itinerary();
+    public MultipleCheckpointsItinary createMultipleCheckpointsItinary() {
+        return new MultipleCheckpointsItinary();
     }
 
     /**
-     * Create an instance of {@link ArrayOfFeature }
+     * Create an instance of {@link Metadata }
      * 
      */
-    public ArrayOfFeature createArrayOfFeature() {
-        return new ArrayOfFeature();
+    public Metadata createMetadata() {
+        return new Metadata();
     }
 
     /**
-     * Create an instance of {@link Feature }
+     * Create an instance of {@link Engine }
      * 
      */
-    public Feature createFeature() {
-        return new Feature();
+    public Engine createEngine() {
+        return new Engine();
     }
 
     /**
-     * Create an instance of {@link Geometry }
+     * Create an instance of {@link Query }
      * 
      */
-    public Geometry createGeometry() {
-        return new Geometry();
+    public Query createQuery() {
+        return new Query();
     }
 
     /**
-     * Create an instance of {@link Properties }
+     * Create an instance of {@link ArrayOfRoute }
      * 
      */
-    public Properties createProperties() {
-        return new Properties();
+    public ArrayOfRoute createArrayOfRoute() {
+        return new ArrayOfRoute();
+    }
+
+    /**
+     * Create an instance of {@link Route }
+     * 
+     */
+    public Route createRoute() {
+        return new Route();
     }
 
     /**
@@ -206,30 +210,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Metadata }
-     * 
-     */
-    public Metadata createMetadata() {
-        return new Metadata();
-    }
-
-    /**
-     * Create an instance of {@link Engine }
-     * 
-     */
-    public Engine createEngine() {
-        return new Engine();
-    }
-
-    /**
-     * Create an instance of {@link Query }
-     * 
-     */
-    public Query createQuery() {
-        return new Query();
-    }
-
-    /**
      * Create an instance of {@link ArrayOfdouble }
      * 
      */
@@ -267,68 +247,81 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Itinerary }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link MultipleCheckpointsItinary }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Itinerary }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link MultipleCheckpointsItinary }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Itinerary")
-    public JAXBElement<Itinerary> createItinerary(Itinerary value) {
-        return new JAXBElement<Itinerary>(_Itinerary_QNAME, Itinerary.class, null, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "MultipleCheckpointsItinary")
+    public JAXBElement<MultipleCheckpointsItinary> createMultipleCheckpointsItinary(MultipleCheckpointsItinary value) {
+        return new JAXBElement<MultipleCheckpointsItinary>(_MultipleCheckpointsItinary_QNAME, MultipleCheckpointsItinary.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfFeature }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfFeature }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "ArrayOfFeature")
-    public JAXBElement<ArrayOfFeature> createArrayOfFeature(ArrayOfFeature value) {
-        return new JAXBElement<ArrayOfFeature>(_ArrayOfFeature_QNAME, ArrayOfFeature.class, null, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Metadata")
+    public JAXBElement<Metadata> createMetadata(Metadata value) {
+        return new JAXBElement<Metadata>(_Metadata_QNAME, Metadata.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Feature }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Engine }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Feature }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link Engine }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Feature")
-    public JAXBElement<Feature> createFeature(Feature value) {
-        return new JAXBElement<Feature>(_Feature_QNAME, Feature.class, null, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Engine")
+    public JAXBElement<Engine> createEngine(Engine value) {
+        return new JAXBElement<Engine>(_Engine_QNAME, Engine.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Geometry }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Geometry }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Geometry")
-    public JAXBElement<Geometry> createGeometry(Geometry value) {
-        return new JAXBElement<Geometry>(_Geometry_QNAME, Geometry.class, null, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Query")
+    public JAXBElement<Query> createQuery(Query value) {
+        return new JAXBElement<Query>(_Query_QNAME, Query.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Properties }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfRoute }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Properties }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfRoute }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Properties")
-    public JAXBElement<Properties> createProperties(Properties value) {
-        return new JAXBElement<Properties>(_Properties_QNAME, Properties.class, null, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "ArrayOfRoute")
+    public JAXBElement<ArrayOfRoute> createArrayOfRoute(ArrayOfRoute value) {
+        return new JAXBElement<ArrayOfRoute>(_ArrayOfRoute_QNAME, ArrayOfRoute.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Route }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Route }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Route")
+    public JAXBElement<Route> createRoute(Route value) {
+        return new JAXBElement<Route>(_Route_QNAME, Route.class, null, value);
     }
 
     /**
@@ -394,45 +387,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Summary")
     public JAXBElement<Summary> createSummary(Summary value) {
         return new JAXBElement<Summary>(_Summary_QNAME, Summary.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Metadata")
-    public JAXBElement<Metadata> createMetadata(Metadata value) {
-        return new JAXBElement<Metadata>(_Metadata_QNAME, Metadata.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Engine }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Engine }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Engine")
-    public JAXBElement<Engine> createEngine(Engine value) {
-        return new JAXBElement<Engine>(_Engine_QNAME, Engine.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Query }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Query")
-    public JAXBElement<Query> createQuery(Query value) {
-        return new JAXBElement<Query>(_Query_QNAME, Query.class, null, value);
     }
 
     /**
@@ -774,16 +728,133 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Itinerary }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link MultipleCheckpointsItinary }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Itinerary }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link MultipleCheckpointsItinary }{@code >}
      */
     @XmlElementDecl(namespace = "http://tempuri.org/", name = "GetBestPathResult", scope = GetBestPathResponse.class)
-    public JAXBElement<Itinerary> createGetBestPathResponseGetBestPathResult(Itinerary value) {
-        return new JAXBElement<Itinerary>(_GetBestPathResponseGetBestPathResult_QNAME, Itinerary.class, GetBestPathResponse.class, value);
+    public JAXBElement<MultipleCheckpointsItinary> createGetBestPathResponseGetBestPathResult(MultipleCheckpointsItinary value) {
+        return new JAXBElement<MultipleCheckpointsItinary>(_GetBestPathResponseGetBestPathResult_QNAME, MultipleCheckpointsItinary.class, GetBestPathResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "instruction", scope = Step.class)
+    public JAXBElement<String> createStepInstruction(String value) {
+        return new JAXBElement<String>(_StepInstruction_QNAME, String.class, Step.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "name", scope = Step.class)
+    public JAXBElement<String> createStepName(String value) {
+        return new JAXBElement<String>(_StepName_QNAME, String.class, Step.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "way_points", scope = Step.class)
+    public JAXBElement<ArrayOfint> createStepWayPoints(ArrayOfint value) {
+        return new JAXBElement<ArrayOfint>(_StepWayPoints_QNAME, ArrayOfint.class, Step.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfStep }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfStep }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "steps", scope = Segment.class)
+    public JAXBElement<ArrayOfStep> createSegmentSteps(ArrayOfStep value) {
+        return new JAXBElement<ArrayOfStep>(_SegmentSteps_QNAME, ArrayOfStep.class, Segment.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfdouble }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfdouble }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "bbox", scope = Route.class)
+    public JAXBElement<ArrayOfdouble> createRouteBbox(ArrayOfdouble value) {
+        return new JAXBElement<ArrayOfdouble>(_RouteBbox_QNAME, ArrayOfdouble.class, Route.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "geometry", scope = Route.class)
+    public JAXBElement<String> createRouteGeometry(String value) {
+        return new JAXBElement<String>(_RouteGeometry_QNAME, String.class, Route.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfSegment }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfSegment }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "segments", scope = Route.class)
+    public JAXBElement<ArrayOfSegment> createRouteSegments(ArrayOfSegment value) {
+        return new JAXBElement<ArrayOfSegment>(_RouteSegments_QNAME, ArrayOfSegment.class, Route.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Summary }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Summary }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "summary", scope = Route.class)
+    public JAXBElement<Summary> createRouteSummary(Summary value) {
+        return new JAXBElement<Summary>(_RouteSummary_QNAME, Summary.class, Route.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "way_points", scope = Route.class)
+    public JAXBElement<ArrayOfint> createRouteWayPoints(ArrayOfint value) {
+        return new JAXBElement<ArrayOfint>(_StepWayPoints_QNAME, ArrayOfint.class, Route.class, value);
     }
 
     /**
@@ -891,123 +962,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "instruction", scope = Step.class)
-    public JAXBElement<String> createStepInstruction(String value) {
-        return new JAXBElement<String>(_StepInstruction_QNAME, String.class, Step.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "name", scope = Step.class)
-    public JAXBElement<String> createStepName(String value) {
-        return new JAXBElement<String>(_StepName_QNAME, String.class, Step.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "way_points", scope = Step.class)
-    public JAXBElement<ArrayOfint> createStepWayPoints(ArrayOfint value) {
-        return new JAXBElement<ArrayOfint>(_StepWayPoints_QNAME, ArrayOfint.class, Step.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfStep }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfStep }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "steps", scope = Segment.class)
-    public JAXBElement<ArrayOfStep> createSegmentSteps(ArrayOfStep value) {
-        return new JAXBElement<ArrayOfStep>(_SegmentSteps_QNAME, ArrayOfStep.class, Segment.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfSegment }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfSegment }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "segments", scope = Properties.class)
-    public JAXBElement<ArrayOfSegment> createPropertiesSegments(ArrayOfSegment value) {
-        return new JAXBElement<ArrayOfSegment>(_PropertiesSegments_QNAME, ArrayOfSegment.class, Properties.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Summary }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Summary }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "summary", scope = Properties.class)
-    public JAXBElement<Summary> createPropertiesSummary(Summary value) {
-        return new JAXBElement<Summary>(_PropertiesSummary_QNAME, Summary.class, Properties.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfint }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "way_points", scope = Properties.class)
-    public JAXBElement<ArrayOfint> createPropertiesWayPoints(ArrayOfint value) {
-        return new JAXBElement<ArrayOfint>(_StepWayPoints_QNAME, ArrayOfint.class, Properties.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfArrayOfdouble }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfArrayOfdouble }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "coordinates", scope = Geometry.class)
-    public JAXBElement<ArrayOfArrayOfdouble> createGeometryCoordinates(ArrayOfArrayOfdouble value) {
-        return new JAXBElement<ArrayOfArrayOfdouble>(_QueryCoordinates_QNAME, ArrayOfArrayOfdouble.class, Geometry.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "type", scope = Geometry.class)
-    public JAXBElement<String> createGeometryType(String value) {
-        return new JAXBElement<String>(_GeometryType_QNAME, String.class, Geometry.class, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfdouble }{@code >}
      * 
      * @param value
@@ -1015,74 +969,9 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfdouble }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "bbox", scope = Feature.class)
-    public JAXBElement<ArrayOfdouble> createFeatureBbox(ArrayOfdouble value) {
-        return new JAXBElement<ArrayOfdouble>(_FeatureBbox_QNAME, ArrayOfdouble.class, Feature.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Geometry }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Geometry }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "geometry", scope = Feature.class)
-    public JAXBElement<Geometry> createFeatureGeometry(Geometry value) {
-        return new JAXBElement<Geometry>(_FeatureGeometry_QNAME, Geometry.class, Feature.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Properties }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link Properties }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "properties", scope = Feature.class)
-    public JAXBElement<Properties> createFeatureProperties(Properties value) {
-        return new JAXBElement<Properties>(_FeatureProperties_QNAME, Properties.class, Feature.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "type", scope = Feature.class)
-    public JAXBElement<String> createFeatureType(String value) {
-        return new JAXBElement<String>(_GeometryType_QNAME, String.class, Feature.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfdouble }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfdouble }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "bbox", scope = Itinerary.class)
-    public JAXBElement<ArrayOfdouble> createItineraryBbox(ArrayOfdouble value) {
-        return new JAXBElement<ArrayOfdouble>(_FeatureBbox_QNAME, ArrayOfdouble.class, Itinerary.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfFeature }{@code >}
-     * 
-     * @param value
-     *     Java instance representing xml element's value.
-     * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfFeature }{@code >}
-     */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "features", scope = Itinerary.class)
-    public JAXBElement<ArrayOfFeature> createItineraryFeatures(ArrayOfFeature value) {
-        return new JAXBElement<ArrayOfFeature>(_ItineraryFeatures_QNAME, ArrayOfFeature.class, Itinerary.class, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "bbox", scope = MultipleCheckpointsItinary.class)
+    public JAXBElement<ArrayOfdouble> createMultipleCheckpointsItinaryBbox(ArrayOfdouble value) {
+        return new JAXBElement<ArrayOfdouble>(_RouteBbox_QNAME, ArrayOfdouble.class, MultipleCheckpointsItinary.class, value);
     }
 
     /**
@@ -1093,22 +982,22 @@ public class ObjectFactory {
      * @return
      *     the new instance of {@link JAXBElement }{@code <}{@link Metadata }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "metadata", scope = Itinerary.class)
-    public JAXBElement<Metadata> createItineraryMetadata(Metadata value) {
-        return new JAXBElement<Metadata>(_ItineraryMetadata_QNAME, Metadata.class, Itinerary.class, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "metadata", scope = MultipleCheckpointsItinary.class)
+    public JAXBElement<Metadata> createMultipleCheckpointsItinaryMetadata(Metadata value) {
+        return new JAXBElement<Metadata>(_MultipleCheckpointsItinaryMetadata_QNAME, Metadata.class, MultipleCheckpointsItinary.class, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfRoute }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfRoute }{@code >}
      */
-    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "type", scope = Itinerary.class)
-    public JAXBElement<String> createItineraryType(String value) {
-        return new JAXBElement<String>(_GeometryType_QNAME, String.class, Itinerary.class, value);
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "routes", scope = MultipleCheckpointsItinary.class)
+    public JAXBElement<ArrayOfRoute> createMultipleCheckpointsItinaryRoutes(ArrayOfRoute value) {
+        return new JAXBElement<ArrayOfRoute>(_MultipleCheckpointsItinaryRoutes_QNAME, ArrayOfRoute.class, MultipleCheckpointsItinary.class, value);
     }
 
     /**

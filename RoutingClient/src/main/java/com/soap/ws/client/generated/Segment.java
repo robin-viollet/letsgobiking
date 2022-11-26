@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="distance" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
- *         &lt;element name="duration" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/&gt;
+ *         &lt;element name="duration" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
  *         &lt;element name="steps" type="{http://schemas.datacontract.org/2004/07/RoutingServer}ArrayOfStep" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Segment {
 
     protected Double distance;
-    protected Integer duration;
+    protected Double duration;
     @XmlElementRef(name = "steps", namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", type = JAXBElement.class, required = false)
     protected JAXBElement<ArrayOfStep> steps;
 
@@ -71,10 +71,10 @@ public class Segment {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link Double }
      *     
      */
-    public Integer getDuration() {
+    public Double getDuration() {
         return duration;
     }
 
@@ -83,10 +83,10 @@ public class Segment {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link Double }
      *     
      */
-    public void setDuration(Integer value) {
+    public void setDuration(Double value) {
         this.duration = value;
     }
 

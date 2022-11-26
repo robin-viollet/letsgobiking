@@ -14,7 +14,7 @@ namespace RoutingServer
 
         public List<Contract> GetAllContracts()
         {
-            return base.SendRequest<List<Contract>>("contracts");
+            return base.SendGetRequest<List<Contract>>("contracts");
         }
 
         public List<Station> GetAllStations(Contract contract)
@@ -23,7 +23,7 @@ namespace RoutingServer
             {
                 { "contract", contract.name }
             };
-            return base.SendRequest<List<Station>>("stations", keyValuePairs);
+            return base.SendGetRequest<List<Station>>("stations", keyValuePairs);
         }
     }
 }
