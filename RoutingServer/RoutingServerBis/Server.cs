@@ -5,6 +5,11 @@ using System.Net.Http;
 using System.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
+using System.Device.Location;
+using System.Net;
+using System.Text.Json.Serialization;
 
 namespace RoutingServer
 {
@@ -61,11 +66,110 @@ namespace RoutingServer
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
     public class Server : IServices
     {
+        private JCDecaux JCDecaux;
+        private Nominatim Nominatim;
+        private OpenRouteDirectionService OpenRouteDirectionService;
+
+        public Server()
+        {
+            this.JCDecaux = new JCDecaux();
+            this.Nominatim = new Nominatim();
+            this.OpenRouteDirectionService= new OpenRouteDirectionService();
+        }
+
         Itinerary IServices.GetBestPath(Location startLocation, Location endLocation)
         {
+            /*HttpClient client = new HttpClient();
+            Dictionary<String, String> keyValuePairs = new Dictionary<String, String>
+            {
+                {"coordinates", "[[8.681495,49.41461],[8.686507,49.41943],[8.687872,49.420318]]" },
+            };
+            var httpRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("https://api.openrouteservice.org/v2/directions/driving-car"),
+                Headers = {
+                            { HttpRequestHeader.Authorization.ToString(), "Bearer 5b3ce3597851110001cf6248cfa6871d615a44e39df1352fbd201d08" },
+                            { HttpRequestHeader.Accept.ToString(), "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8" },
+                            { HttpRequestHeader.ContentType.ToString(), "application/json; charset=utf-8"}
+                },
+            };
+
+            httpRequestMessage.Content = new FormUrlEncodedContent(keyValuePairs);
+
+            HttpResponseMessage response = client.SendAsync(httpRequestMessage).Result;
+            String result = response.Content.ReadAsStringAsync().Result;
+
+            Itinerary toSendBack = new Itinerary();
+            toSendBack.type = result;
+
+            return toSendBack;*/
+
+            List<Contract> contracts = this.JCDecaux.GetAllContracts();
+            Contract concernedContract = this.GetConcernedContract(startLocation, contracts);
+
+            List<Station> stationOfTheContract = this.JCDecaux.GetAllStations(concernedContract);
+
+            GeoCoordinate startCoordinate = this.GetGeoCoordinate(startLocation);
+            GeoCoordinate endCoordinate = this.GetGeoCoordinate(endLocation);
+
+            Station pickUpStation = this.GetClosestPickUpStation(startCoordinate, stationOfTheContract);
+            Station dropOffStation = this.GetClosestDropOffStation(endCoordinate, stationOfTheContract);
+
+
             throw new NotImplementedException();
         }
+
+        private Contract GetConcernedContract(Location location, List<Contract> contracts)
+        {
+            foreach (Contract contract in contracts)
+            {
+                if (contract.cities.Contains(location.city))
+                {
+                    return contract;
+                }
+            }
+            //FIXME
+            return null;
+        }
+
+        private Station GetClosestPickUpStation(GeoCoordinate geoCoordinate, List<Station> stations)
+        {
+            return this.GetClosestStation(geoCoordinate, stations.Where(s => s.CanPickUpABike()).ToList());
+        }
+
+        private Station GetClosestDropOffStation(GeoCoordinate geoCoordinate, List<Station> stations)
+        {
+            return this.GetClosestStation(geoCoordinate, stations.Where(s => s.CanDropOffABike()).ToList());
+        }
+
+        private Station GetClosestStation(GeoCoordinate geoCoordinate, List<Station> stations)
+        {
+            Station closestStation = null;
+            double closestDistance = Double.MaxValue;
+
+            GeoCoordinate toCompare;
+            double temporaryDistance;
+            foreach (Station station in stations)
+            {
+                toCompare = new GeoCoordinate(station.position.latitude, station.position.longitude);
+                temporaryDistance = geoCoordinate.GetDistanceTo(toCompare);
+                if (temporaryDistance <= closestDistance)
+                {
+                    closestStation = station;
+                    closestDistance = temporaryDistance;
+                }
+            }
+            return closestStation;
+        }
+
+        private GeoCoordinate GetGeoCoordinate(Location location)
+        {
+            Place place = this.Nominatim.GetPlace(location);
+            return new GeoCoordinate(Double.Parse(place.lat), Double.Parse(place.lon));
+        }
     }
+
 
     internal class RestClient
     {

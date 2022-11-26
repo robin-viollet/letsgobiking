@@ -13,7 +13,7 @@ namespace RoutingServer
         public Nominatim() : base("https://nominatim.openstreetmap.org/")
         { }
 
-        public Place getPlace(Location location)
+        public Place GetPlace(Location location)
         {
             Dictionary<String, String> keyValuePairs = new Dictionary<string, string>
             {

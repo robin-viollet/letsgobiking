@@ -13,6 +13,6 @@ namespace RoutingServer
         public String name { get; set; }
         public String commercial_name { get; set; }
         public String country_code { get; set; }
-        public String[] cities { get; set; }
+        public List<string> cities { get; set; }
     }
 }

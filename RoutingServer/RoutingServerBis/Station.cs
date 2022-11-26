@@ -22,7 +22,30 @@ namespace RoutingServer
         public object shape { get; set; }
         public TotalStands totalStands { get; set; }
         public MainStands mainStands { get; set; }
-        public object overflowStands { get; set; }
+        public OverflowStands overflowStands { get; set; }
+
+        public Boolean IsOpen()
+        {
+            return status.Equals("OPEN");
+        }
+
+        public Boolean CanPickUpABike()
+        {
+            if(this.IsOpen() && (this.totalStands.availabilities.HasAnyBikeAvailable() || this.mainStands.availabilities.HasAnyBikeAvailable()))
+            {
+                return true;
+            }
+            return this.overflow && this.overflowStands != null && this.overflowStands.availabilities.HasAnyBikeAvailable();
+        }
+
+        public Boolean CanDropOffABike()
+        {
+            if(this.IsOpen() && (this.totalStands.availabilities.HasAnAvailableStand() || this.mainStands.availabilities.HasAnAvailableStand()))
+            {
+                return true;
+            }
+            return this.overflow && this.overflowStands != null && this.overflowStands.availabilities.HasAnAvailableStand();
+        }
     }
 
     public class Availabilities
@@ -33,6 +56,16 @@ namespace RoutingServer
         public int electricalBikes { get; set; }
         public int electricalInternalBatteryBikes { get; set; }
         public int electricalRemovableBatteryBikes { get; set; }
+
+        public Boolean HasAnyBikeAvailable()
+        {
+            return bikes > 0;
+        }
+
+        public Boolean HasAnAvailableStand()
+        {
+            return stands > 0;
+        }
     }
 
     public class MainStands
@@ -53,5 +86,10 @@ namespace RoutingServer
         public int capacity { get; set; }
     }
 
+    public class OverflowStands
+    {
+        public Availabilities availabilities { get; set; }
+        public int capacity { get; set; }
+    }
 
 }

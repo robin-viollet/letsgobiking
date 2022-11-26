@@ -1,6 +1,3 @@
-C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServerBis.dll.config
-C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServerBis.dll
-C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServerBis.pdb
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\System.Buffers.dll
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\System.Memory.dll
@@ -22,5 +19,8 @@ C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.csproj.AssemblyReference.cache
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.csproj.CoreCompileInputs.cache
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.csproj.CopyComplete
-C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServerBis.dll
-C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServerBis.pdb
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServer.dll.config
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServer.dll
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServer.pdb
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.dll
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.pdb

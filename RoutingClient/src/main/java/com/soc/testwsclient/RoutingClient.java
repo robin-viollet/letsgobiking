@@ -5,9 +5,6 @@
 
 package com.soc.testwsclient;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
 import com.soap.ws.client.generated.IServices;
 import com.soap.ws.client.generated.Location;
 import com.soap.ws.client.generated.ObjectFactory;
@@ -23,9 +20,21 @@ public class RoutingClient {
         System.out.println("Hello World! we are going to test a SOAP client written in Java");
         Server server = new Server();
         IServices serverServices = server.getBasicHttpBindingIServices();
-        System.out.println(serverServices.getBestPath(new Location(), new Location()));
-        ObjectFactory test = new ObjectFactory();
         
-        new Location().setCity(test.createString("Pute"));
+        ObjectFactory objectFactory = new  ObjectFactory();
+        Location startLocation = new Location();
+        Location endLocation = new Location();
+        
+        startLocation.setStreet(objectFactory.createString("22 Rue Jacques Preiss"));
+        startLocation.setPostalCode(objectFactory.createString("68100"));
+        startLocation.setCity(objectFactory.createString("Mulhouse"));
+        startLocation.setCountry(objectFactory.createString("France"));
+        
+        endLocation.setStreet(objectFactory.createString("44 Av. Roger Salengro"));
+        endLocation.setPostalCode(objectFactory.createString("68100"));
+        endLocation.setCity(objectFactory.createString("Mulhouse"));
+        endLocation.setCountry(objectFactory.createString("France"));
+        
+        System.out.println(serverServices.getBestPath(startLocation, endLocation).getType().getValue());
     }
 }
