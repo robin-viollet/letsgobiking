@@ -14,12 +14,25 @@ namespace RoutingServer
         [OperationContract]
         MultipleCheckpointsItinary GetBestPath(Location startLocation, Location endLocation);
 
-        /*[OperationContract]
-        Itinerary GetBestPath(Location startLocation, Location endLocation);*/
+        [OperationContract]
+        List<Contract> GetAllContracts();
     }
 
     // Utilisez un contrat de données comme indiqué dans l'exemple ci-après pour ajouter les types composites aux opérations de service.
     // Vous pouvez ajouter des fichiers XSD au projet. Une fois le projet généré, vous pouvez utiliser directement les types de données qui y sont définis, avec l'espace de noms "RoutingServer.ContractType".
+
+    [DataContract]
+    public class Contract
+    {
+        [DataMember]
+        public String name { get; set; }
+        [DataMember]
+        public String commercial_name { get; set; }
+        [DataMember]
+        public String country_code { get; set; }
+        [DataMember]
+        public List<string> cities { get; set; }
+    }
 
     [DataContract]
     public class Location

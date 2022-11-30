@@ -18,7 +18,10 @@ namespace RoutingServer
 
         public RequestHelper(String api_address)
         {
-            this.client = new HttpClient();
+            this.client = new HttpClient
+            {
+                MaxResponseContentBufferSize = 10000000000
+            };
             this.client.DefaultRequestHeaders.Add("User-Agent", "C# App");
             this.api_address = api_address;
         }
@@ -37,7 +40,7 @@ namespace RoutingServer
                 request += this.apiKeyAndValue + "&";
             }
 
-            if(keysAndValues!= null)
+            if(keysAndValues != null)
             {
                 foreach (KeyValuePair<String, String> entry in keysAndValues.ToList())
                 {

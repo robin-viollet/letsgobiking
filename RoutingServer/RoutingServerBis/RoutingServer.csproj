@@ -98,7 +98,6 @@
     <Compile Include="Nominatim.cs" />
     <Compile Include="JCDecaux.cs" />
     <Compile Include="RequestHelper.cs" />
-    <Compile Include="Contract.cs" />
     <Compile Include="IServices.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

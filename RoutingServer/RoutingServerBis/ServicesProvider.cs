@@ -20,6 +20,11 @@ namespace RoutingServer
             this.OpenRouteDirectionService= new OpenRouteDirectionService();
         }
 
+        public List<Contract> GetAllContracts()
+        {
+            return this.JCDecaux.GetAllContracts();
+        }
+
         MultipleCheckpointsItinary IServices.GetBestPath(Location startLocation, Location endLocation)
         {
             Console.WriteLine("Request received : ");
@@ -48,11 +53,13 @@ namespace RoutingServer
                 Console.WriteLine("Pick up : " + pickUpStation.number + pickUpStation.address);
                 Console.WriteLine("Drop off : " + dropOffStation.number + dropOffStation.address);
 
-                List<Double[]> checkpointsCoordinates = new List<double[]>();
-                checkpointsCoordinates.Add(new double[] { startCoordinate.Longitude, startCoordinate.Latitude});
-                checkpointsCoordinates.Add(new double[] { pickUpStation.position.longitude, pickUpStation.position.latitude});
-                checkpointsCoordinates.Add(new double[] { dropOffStation.position.longitude, dropOffStation.position.latitude });
-                checkpointsCoordinates.Add(new double[] { endCoordinate.Longitude, endCoordinate.Latitude });
+                List<Double[]> checkpointsCoordinates = new List<double[]>
+                {
+                    new double[] { startCoordinate.Longitude, startCoordinate.Latitude },
+                    new double[] { pickUpStation.position.longitude, pickUpStation.position.latitude },
+                    new double[] { dropOffStation.position.longitude, dropOffStation.position.latitude },
+                    new double[] { endCoordinate.Longitude, endCoordinate.Latitude }
+                };
 
                 Console.WriteLine(JsonSerializer.Serialize(checkpointsCoordinates));
 
@@ -75,12 +82,17 @@ namespace RoutingServer
         {
             foreach (Contract contract in contracts)
             {
-                if (contract.cities != null && contract.cities.Contains(location.city))
+                if (contract.cities != null)
                 {
-                    return contract;
+                    foreach(String city in contract.cities)
+                    {
+                        if (city.ToLower().Equals(location.city.ToLower()))
+                        {
+                            return contract;
+                        }
+                    }
                 }
             }
-            //FIXME gestion des exceptions ???
             return null;
         }
 
