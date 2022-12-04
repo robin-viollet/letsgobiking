@@ -57,14 +57,14 @@ public class Columbus extends Application {
         List<String> contractsList = serverServices.getContracts().getContract().stream().map(c -> c.getCommercialName().getValue()).collect(Collectors.toList());
 
         WebView webView = new WebView();
-        final WebEngine mywebEngine = webView.getEngine();
+        final WebEngine webEngine = webView.getEngine();
 
         var mainPage = getClass().getResource(INDEX_PATH);
 
         if (mainPage == null){
-            mywebEngine.loadContent("<h1>Error</h1><p>Could not load map. Please try to reinstall the app.</p>");
+            webEngine.loadContent("<h1>Error</h1><p>Could not load map. Please try to reinstall the app.</p>");
         } else {
-            mywebEngine.load(mainPage.toURI().toURL().toString());
+            webEngine.load(mainPage.toURI().toURL().toString());
         }
 
         GridPane root = new GridPane();
@@ -82,19 +82,11 @@ public class Columbus extends Application {
             Location startLocation = departure.toLocation();
             Location endLocation = arrival.toLocation();
 
-            /*startLocation.setStreet(objectFactory.createString("22 Rue Jacques Preiss"));
-            startLocation.setPostalCode(objectFactory.createString("68100"));
-            startLocation.setCity(objectFactory.createString("Mulhouse"));
-            startLocation.setCountry(objectFactory.createString("France"));
-
-            endLocation.setStreet(objectFactory.createString("44 Av. Roger Salengro"));
-            endLocation.setPostalCode(objectFactory.createString("68100"));
-            endLocation.setCity(objectFactory.createString("Mulhouse"));
-            endLocation.setCountry(objectFactory.createString("France"));*/
-
             System.out.println(startLocation);
             System.out.println(endLocation);
-            System.out.println(serverServices.getBestPath(startLocation, endLocation));
+            var path = serverServices.getBestPath(startLocation, endLocation);
+            webEngine.executeScript("setRoute(\"" + path.getRoutes().getValue().getRoute().get(0).getGeometry().getValue() + "\");");
+            System.out.println(path);
         });
 
         root.add(webView, MAP_W_START, MAP_H_START, MAP_WIDTH, MAP_HEIGHT);
