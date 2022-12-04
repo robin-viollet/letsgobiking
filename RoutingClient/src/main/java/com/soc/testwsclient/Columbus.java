@@ -9,6 +9,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -105,6 +107,11 @@ public class Columbus extends Application {
         GridPane.setMargin(arrival, new Insets(GAP));
 
         Scene scene = new Scene(root);
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, t -> {
+            if(t.getCode()== KeyCode.ESCAPE){
+                System.exit(0);
+            }
+        });
         stage.setTitle("Let'sGoDrinking - Client");
         stage.setScene(scene);
         stage.show();
