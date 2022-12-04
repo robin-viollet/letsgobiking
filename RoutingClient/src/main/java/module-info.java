@@ -6,6 +6,9 @@ module com.soc.testwsclient {
     requires java.jws;
     requires java.xml.ws;
     requires java.desktop;
+    requires gmbal;
+
+    exports com.soap.ws.client.generated to com.sun.xml.ws;
 
     opens com.soc.testwsclient to javafx.graphics;
     opens com.soap.ws.client.generated to com.sun.xml.bind;
