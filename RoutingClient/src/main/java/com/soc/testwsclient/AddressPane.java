@@ -40,10 +40,10 @@ public class AddressPane extends GridPane {
     public Location toLocation(){
         ObjectFactory objectFactory = new  ObjectFactory();
 
-        Location location = new Location();
+        Location location = objectFactory.createLocation();
 
-        location.setStreet(objectFactory.createString(street.getText()));
-        location.setCity(objectFactory.createString(city.getSelectionModel().getSelectedItem()));
+        location.setStreet(objectFactory.createLocationStreet(street.getText()));
+        location.setCity(objectFactory.createLocationCity(city.getSelectionModel().getSelectedItem()));
 
         return location;
     }
