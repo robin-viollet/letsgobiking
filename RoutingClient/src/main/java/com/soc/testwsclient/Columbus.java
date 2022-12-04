@@ -85,8 +85,9 @@ public class Columbus extends Application {
             System.out.println(startLocation);
             System.out.println(endLocation);
             var path = serverServices.getBestPath(startLocation, endLocation);
-            webEngine.executeScript("setRoute(\"" + path.getRoutes().getValue().getRoute().get(0).getGeometry().getValue() + "\");");
-            System.out.println(path);
+            var route = path.getRoutes().getValue().getRoute().get(0).getGeometry().getValue();
+            webEngine.executeScript("setRoute(\"" + route + "\");");
+            System.out.println(route);
         });
 
         root.add(webView, MAP_W_START, MAP_H_START, MAP_WIDTH, MAP_HEIGHT);
@@ -104,7 +105,7 @@ public class Columbus extends Application {
                 System.exit(0);
             }
         });
-        stage.setTitle("Let'sGoDrinking - Client");
+        stage.setTitle("Let'sGoBiking - Client");
         stage.setScene(scene);
         stage.show();
     }

@@ -41,7 +41,8 @@ const map = new ol.Map({
 });
 function setRoute(path) {
     const route = new ol.format.Polyline({
-        factor: 1e6
+        factor: 1e5,
+        geometryLayout: 'XY'
     }).readGeometry(path, {
         dataProjection: 'EPSG:4326',
         featureProjection: 'EPSG:3857'
