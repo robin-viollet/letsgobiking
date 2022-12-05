@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoutingServer", "RoutingServerBis\RoutingServer.csproj", "{84AA84EF-6FF5-4266-BA7B-3F21C16B5A5B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B2D9B431-FD4F-4F06-890A-475F3243F5FF} = {B2D9B431-FD4F-4F06-890A-475F3243F5FF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{1ACD447C-9007-4267-B8C7-1E5287A390C1}"
 EndProject

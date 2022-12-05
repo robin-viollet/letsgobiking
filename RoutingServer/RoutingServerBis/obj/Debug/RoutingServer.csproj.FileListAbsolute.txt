@@ -25,3 +25,4 @@ C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\RoutingServer.exe
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.csproj.SuggestedBindingRedirects.cache
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.exe
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\XsdGeneratedCode\GeneratedXsdTypes.cs

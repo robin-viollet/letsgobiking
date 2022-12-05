@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Security.Policy;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace RoutingServer
@@ -18,10 +15,7 @@ namespace RoutingServer
 
         public RequestHelper(String api_address)
         {
-            this.client = new HttpClient
-            {
-                MaxResponseContentBufferSize = 10000000000
-            };
+            this.client = new HttpClient();
             this.client.DefaultRequestHeaders.Add("User-Agent", "C# App");
             this.api_address = api_address;
         }

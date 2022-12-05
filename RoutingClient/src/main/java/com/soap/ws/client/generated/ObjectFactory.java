@@ -40,9 +40,12 @@ public class ObjectFactory {
     private final static QName _ArrayOfStep_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "ArrayOfStep");
     private final static QName _Step_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Step");
     private final static QName _Summary_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Summary");
+    private final static QName _ArrayOfContract_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "ArrayOfContract");
+    private final static QName _Contract_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "Contract");
     private final static QName _ArrayOfdouble_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfdouble");
     private final static QName _ArrayOfArrayOfdouble_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfArrayOfdouble");
     private final static QName _ArrayOfint_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfint");
+    private final static QName _ArrayOfstring_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/Arrays", "ArrayOfstring");
     private final static QName _AnyType_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "anyType");
     private final static QName _AnyURI_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "anyURI");
     private final static QName _Base64Binary_QNAME = new QName("http://schemas.microsoft.com/2003/10/Serialization/", "base64Binary");
@@ -67,8 +70,12 @@ public class ObjectFactory {
     private final static QName _GetBestPathStartLocation_QNAME = new QName("http://tempuri.org/", "startLocation");
     private final static QName _GetBestPathEndLocation_QNAME = new QName("http://tempuri.org/", "endLocation");
     private final static QName _GetBestPathResponseGetBestPathResult_QNAME = new QName("http://tempuri.org/", "GetBestPathResult");
+    private final static QName _GetAllContractsResponseGetAllContractsResult_QNAME = new QName("http://tempuri.org/", "GetAllContractsResult");
+    private final static QName _ContractCities_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "cities");
+    private final static QName _ContractCommercialName_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "commercial_name");
+    private final static QName _ContractCountryCode_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "country_code");
+    private final static QName _ContractName_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "name");
     private final static QName _StepInstruction_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "instruction");
-    private final static QName _StepName_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "name");
     private final static QName _StepWayPoints_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "way_points");
     private final static QName _SegmentSteps_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "steps");
     private final static QName _RouteBbox_QNAME = new QName("http://schemas.datacontract.org/2004/07/RoutingServer", "bbox");
@@ -127,6 +134,30 @@ public class ObjectFactory {
      */
     public MultipleCheckpointsItinary createMultipleCheckpointsItinary() {
         return new MultipleCheckpointsItinary();
+    }
+
+    /**
+     * Create an instance of {@link GetAllContracts }
+     * 
+     */
+    public GetAllContracts createGetAllContracts() {
+        return new GetAllContracts();
+    }
+
+    /**
+     * Create an instance of {@link GetAllContractsResponse }
+     * 
+     */
+    public GetAllContractsResponse createGetAllContractsResponse() {
+        return new GetAllContractsResponse();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfContract }
+     * 
+     */
+    public ArrayOfContract createArrayOfContract() {
+        return new ArrayOfContract();
     }
 
     /**
@@ -210,6 +241,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Contract }
+     * 
+     */
+    public Contract createContract() {
+        return new Contract();
+    }
+
+    /**
      * Create an instance of {@link ArrayOfdouble }
      * 
      */
@@ -231,6 +270,14 @@ public class ObjectFactory {
      */
     public ArrayOfint createArrayOfint() {
         return new ArrayOfint();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfstring }
+     * 
+     */
+    public ArrayOfstring createArrayOfstring() {
+        return new ArrayOfstring();
     }
 
     /**
@@ -390,6 +437,32 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfContract }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfContract }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "ArrayOfContract")
+    public JAXBElement<ArrayOfContract> createArrayOfContract(ArrayOfContract value) {
+        return new JAXBElement<ArrayOfContract>(_ArrayOfContract_QNAME, ArrayOfContract.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Contract }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Contract }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "Contract")
+    public JAXBElement<Contract> createContract(Contract value) {
+        return new JAXBElement<Contract>(_Contract_QNAME, Contract.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfdouble }{@code >}
      * 
      * @param value
@@ -426,6 +499,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays", name = "ArrayOfint")
     public JAXBElement<ArrayOfint> createArrayOfint(ArrayOfint value) {
         return new JAXBElement<ArrayOfint>(_ArrayOfint_QNAME, ArrayOfint.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfstring }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfstring }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays", name = "ArrayOfstring")
+    public JAXBElement<ArrayOfstring> createArrayOfstring(ArrayOfstring value) {
+        return new JAXBElement<ArrayOfstring>(_ArrayOfstring_QNAME, ArrayOfstring.class, null, value);
     }
 
     /**
@@ -741,6 +827,71 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfContract }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfContract }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://tempuri.org/", name = "GetAllContractsResult", scope = GetAllContractsResponse.class)
+    public JAXBElement<ArrayOfContract> createGetAllContractsResponseGetAllContractsResult(ArrayOfContract value) {
+        return new JAXBElement<ArrayOfContract>(_GetAllContractsResponseGetAllContractsResult_QNAME, ArrayOfContract.class, GetAllContractsResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayOfstring }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ArrayOfstring }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "cities", scope = Contract.class)
+    public JAXBElement<ArrayOfstring> createContractCities(ArrayOfstring value) {
+        return new JAXBElement<ArrayOfstring>(_ContractCities_QNAME, ArrayOfstring.class, Contract.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "commercial_name", scope = Contract.class)
+    public JAXBElement<String> createContractCommercialName(String value) {
+        return new JAXBElement<String>(_ContractCommercialName_QNAME, String.class, Contract.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "country_code", scope = Contract.class)
+    public JAXBElement<String> createContractCountryCode(String value) {
+        return new JAXBElement<String>(_ContractCountryCode_QNAME, String.class, Contract.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "name", scope = Contract.class)
+    public JAXBElement<String> createContractName(String value) {
+        return new JAXBElement<String>(_ContractName_QNAME, String.class, Contract.class, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
      * @param value
@@ -763,7 +914,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://schemas.datacontract.org/2004/07/RoutingServer", name = "name", scope = Step.class)
     public JAXBElement<String> createStepName(String value) {
-        return new JAXBElement<String>(_StepName_QNAME, String.class, Step.class, value);
+        return new JAXBElement<String>(_ContractName_QNAME, String.class, Step.class, value);
     }
 
     /**

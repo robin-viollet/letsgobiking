@@ -40,4 +40,15 @@ public interface IServices {
         @WebParam(name = "endLocation", targetNamespace = "http://tempuri.org/")
         Location endLocation);
 
+    /**
+     * 
+     * @return
+     *     returns com.soap.ws.client.generated.ArrayOfContract
+     */
+    @WebMethod(operationName = "GetAllContracts", action = "http://tempuri.org/IServices/GetAllContracts")
+    @WebResult(name = "GetAllContractsResult", targetNamespace = "http://tempuri.org/")
+    @RequestWrapper(localName = "GetAllContracts", targetNamespace = "http://tempuri.org/", className = "com.soap.ws.client.generated.GetAllContracts")
+    @ResponseWrapper(localName = "GetAllContractsResponse", targetNamespace = "http://tempuri.org/", className = "com.soap.ws.client.generated.GetAllContractsResponse")
+    public ArrayOfContract getAllContracts();
+
 }

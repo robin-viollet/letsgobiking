@@ -1,14 +1,13 @@
-﻿using System;
+﻿using RoutingServer.IProxyCacheServices;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+
 
 namespace RoutingServer
 {
     internal class JCDecaux : RequestHelper
     {
+        private static readonly ProxyCacheServicesClient proxyCacheServicesClient = new ProxyCacheServicesClient();
+
         public JCDecaux() : base("https://api.jcdecaux.com/vls/v3/", "apiKey", "ac8828262f441bebc10d8f59f3aa109399f6f66b")
         { }
 
@@ -19,11 +18,7 @@ namespace RoutingServer
 
         public List<Station> GetAllStations(Contract contract)
         {
-            Dictionary<String, String> keyValuePairs = new Dictionary<string, string>
-            {
-                { "contract", contract.name }
-            };
-            return base.SendGetRequest<List<Station>>("stations", keyValuePairs);
+            return proxyCacheServicesClient.GetStationsFromContract(contract.name);
         }
     }
 }

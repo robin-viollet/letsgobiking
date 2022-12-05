@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Globalization;
 using System.Device.Location;
+using RoutingServer.IProxyCacheServices;
 
 namespace RoutingServer
 {
@@ -98,12 +99,12 @@ namespace RoutingServer
 
         private Station GetClosestPickUpStation(GeoCoordinate geoCoordinate, List<Station> stations)
         {
-            return this.GetClosestStation(geoCoordinate, stations.Where(s => s.CanPickUpABike()).ToList());
+            return this.GetClosestStation(geoCoordinate, stations.Where(s => s.canPickUpABike).ToList());
         }
 
         private Station GetClosestDropOffStation(GeoCoordinate geoCoordinate, List<Station> stations)
         {
-            return this.GetClosestStation(geoCoordinate, stations.Where(s => s.CanDropOffABike()).ToList());
+            return this.GetClosestStation(geoCoordinate, stations.Where(s => s.canDropOfABike).ToList());
         }
 
         private Station GetClosestStation(GeoCoordinate geoCoordinate, List<Station> stations)
