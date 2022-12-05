@@ -119,6 +119,12 @@
     <None Include="Connected Services\IProxyCacheServices\ProxyCacheServicesProvider2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\IProxyCacheServices\ProxyCacheServicesProvider3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\IProxyCacheServices\RoutingServer.IProxyCacheServices.Contract.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\IProxyCacheServices\RoutingServer.IProxyCacheServices.Station.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

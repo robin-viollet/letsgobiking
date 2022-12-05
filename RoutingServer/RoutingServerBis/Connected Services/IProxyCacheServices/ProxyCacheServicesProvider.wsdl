@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:8751/Design_Time_Addresses/ProxyCache/ProxyCacheServicesProvider?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8751/Design_Time_Addresses/ProxyCache/ProxyCacheServicesProvider?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8751/Design_Time_Addresses/ProxyCache/ProxyCacheServicesProvider?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ProxyCache" />
+      <xsd:import schemaLocation="http://localhost:8751/Design_Time_Addresses/ProxyCache/ProxyCacheServicesProvider?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IProxyCacheServices_GetStationsFromContract_InputMessage">
@@ -13,16 +14,35 @@
   <wsdl:message name="IProxyCacheServices_GetStationsFromContract_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetStationsFromContractResponse" />
   </wsdl:message>
+  <wsdl:message name="IProxyCacheServices_GetAllContracts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllContracts" />
+  </wsdl:message>
+  <wsdl:message name="IProxyCacheServices_GetAllContracts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllContractsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProxyCacheServices">
     <wsdl:operation name="GetStationsFromContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IProxyCacheServices/GetStationsFromContract" message="tns:IProxyCacheServices_GetStationsFromContract_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProxyCacheServices/GetStationsFromContractResponse" message="tns:IProxyCacheServices_GetStationsFromContract_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllContracts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProxyCacheServices/GetAllContracts" message="tns:IProxyCacheServices_GetAllContracts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProxyCacheServices/GetAllContractsResponse" message="tns:IProxyCacheServices_GetAllContracts_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProxyCacheServices" type="tns:IProxyCacheServices">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetStationsFromContract">
       <soap:operation soapAction="http://tempuri.org/IProxyCacheServices/GetStationsFromContract" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllContracts">
+      <soap:operation soapAction="http://tempuri.org/IProxyCacheServices/GetAllContracts" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -23,6 +23,9 @@ namespace RoutingServer.IProxyCacheServices {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(RoutingServer.IProxyCacheServices.OverflowStands))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(RoutingServer.IProxyCacheServices.Position))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(RoutingServer.IProxyCacheServices.TotalStands))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<RoutingServer.IProxyCacheServices.Contract>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RoutingServer.IProxyCacheServices.Contract))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<string>))]
     public partial class Station : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -689,6 +692,99 @@ namespace RoutingServer.IProxyCacheServices {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Contract", Namespace="http://schemas.datacontract.org/2004/07/ProxyCache")]
+    [System.SerializableAttribute()]
+    public partial class Contract : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<string> citiesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string commercial_nameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string country_codeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<string> cities {
+            get {
+                return this.citiesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.citiesField, value) != true)) {
+                    this.citiesField = value;
+                    this.RaisePropertyChanged("cities");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string commercial_name {
+            get {
+                return this.commercial_nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.commercial_nameField, value) != true)) {
+                    this.commercial_nameField = value;
+                    this.RaisePropertyChanged("commercial_name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string country_code {
+            get {
+                return this.country_codeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.country_codeField, value) != true)) {
+                    this.country_codeField = value;
+                    this.RaisePropertyChanged("country_code");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="IProxyCacheServices.IProxyCacheServices")]
     public interface IProxyCacheServices {
@@ -698,6 +794,12 @@ namespace RoutingServer.IProxyCacheServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCacheServices/GetStationsFromContract", ReplyAction="http://tempuri.org/IProxyCacheServices/GetStationsFromContractResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<RoutingServer.IProxyCacheServices.Station>> GetStationsFromContractAsync(string contractName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCacheServices/GetAllContracts", ReplyAction="http://tempuri.org/IProxyCacheServices/GetAllContractsResponse")]
+        System.Collections.Generic.List<RoutingServer.IProxyCacheServices.Contract> GetAllContracts();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProxyCacheServices/GetAllContracts", ReplyAction="http://tempuri.org/IProxyCacheServices/GetAllContractsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<RoutingServer.IProxyCacheServices.Contract>> GetAllContractsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -733,6 +835,14 @@ namespace RoutingServer.IProxyCacheServices {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<RoutingServer.IProxyCacheServices.Station>> GetStationsFromContractAsync(string contractName) {
             return base.Channel.GetStationsFromContractAsync(contractName);
+        }
+        
+        public System.Collections.Generic.List<RoutingServer.IProxyCacheServices.Contract> GetAllContracts() {
+            return base.Channel.GetAllContracts();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<RoutingServer.IProxyCacheServices.Contract>> GetAllContractsAsync() {
+            return base.Channel.GetAllContractsAsync();
         }
     }
 }

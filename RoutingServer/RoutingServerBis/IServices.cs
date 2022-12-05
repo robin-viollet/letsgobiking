@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RoutingServer.IProxyCacheServices;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -10,7 +11,7 @@ namespace RoutingServer
     public interface IServices
     {
         [OperationContract]
-        MultipleCheckpointsItinary GetBestPath(Location startLocation, Location endLocation);
+        RequestResult GetBestPath(Location startLocation, Location endLocation);
 
         [OperationContract]
         List<Contract> GetAllContracts();
@@ -20,16 +21,13 @@ namespace RoutingServer
     // Vous pouvez ajouter des fichiers XSD au projet. Une fois le projet généré, vous pouvez utiliser directement les types de données qui y sont définis, avec l'espace de noms "RoutingServer.ContractType".
 
     [DataContract]
-    public class Contract
+    public class RequestResult
     {
         [DataMember]
-        public String name { get; set; }
+        public String errorMessage { get; set; }
+
         [DataMember]
-        public String commercial_name { get; set; }
-        [DataMember]
-        public String country_code { get; set; }
-        [DataMember]
-        public List<string> cities { get; set; }
+        public Itinerary[] itineraries { get; set; }
     }
 
     [DataContract]
@@ -69,32 +67,16 @@ namespace RoutingServer
         public List<double> bbox { get; set; }
         [DataMember]
         public Metadata metadata { get; set; }
-    }
 
-    [DataContract]
-    public class MultipleCheckpointsItinary
-    {
-        [DataMember]
-        public List<Route> routes { get; set; }
-        [DataMember]
-        public List<double> bbox { get; set; }
-        [DataMember]
-        public Metadata metadata { get; set; }
-    }
-
-    [DataContract]
-    public class Route
-    {
-        [DataMember]
-        public Summary summary { get; set; }
-        [DataMember]
-        public List<Segment> segments { get; set; }
-        [DataMember]
-        public List<double> bbox { get; set; }
-        [DataMember]
-        public string geometry { get; set; }
-        [DataMember]
-        public List<int> way_points { get; set; }
+        public double GetTotalDuration()
+        {
+            double totalDuration = 0;
+            foreach (Feature feature in features)
+            {
+                totalDuration += feature.properties.summary.duration;
+            }
+            return totalDuration;
+        }
     }
 
     [DataContract]

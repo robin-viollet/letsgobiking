@@ -47,6 +47,82 @@ namespace RoutingServer.ContractTypes
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCache")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCache", IsNullable=true)]
+    public partial class Contract
+    {
+        
+        private string[] citiesField;
+        
+        private string commercial_nameField;
+        
+        private string country_codeField;
+        
+        private string nameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")]
+        public string[] cities
+        {
+            get
+            {
+                return this.citiesField;
+            }
+            set
+            {
+                this.citiesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string commercial_name
+        {
+            get
+            {
+                return this.commercial_nameField;
+            }
+            set
+            {
+                this.commercial_nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string country_code
+        {
+            get
+            {
+                return this.country_codeField;
+            }
+            set
+            {
+                this.country_codeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("MSBuild", "17.4.0+18d5aef85920037c9d6ff49b1215a4daf515197f")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCache")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCache", IsNullable=true)]
     public partial class TotalStands
     {
         
@@ -920,6 +996,45 @@ namespace RoutingServer.ContractTypes
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://tempuri.org/", IsNullable=false)]
+    public partial class GetAllContracts
+    {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("MSBuild", "17.4.0+18d5aef85920037c9d6ff49b1215a4daf515197f")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://tempuri.org/")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://tempuri.org/", IsNullable=false)]
+    public partial class GetAllContractsResponse
+    {
+        
+        private Contract[] getAllContractsResultField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCache")]
+        public Contract[] GetAllContractsResult
+        {
+            get
+            {
+                return this.getAllContractsResultField;
+            }
+            set
+            {
+                this.getAllContractsResultField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("MSBuild", "17.4.0+18d5aef85920037c9d6ff49b1215a4daf515197f")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="ArrayOfStation", Namespace="http://schemas.datacontract.org/2004/07/ProxyCache")]
     [System.Xml.Serialization.XmlRootAttribute("ArrayOfStation", Namespace="http://schemas.datacontract.org/2004/07/ProxyCache", IsNullable=true)]
     public partial class ArrayOfStation1
@@ -938,6 +1053,60 @@ namespace RoutingServer.ContractTypes
             set
             {
                 this.stationField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("MSBuild", "17.4.0+18d5aef85920037c9d6ff49b1215a4daf515197f")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCache")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCache", IsNullable=true)]
+    public partial class ArrayOfContract
+    {
+        
+        private Contract[] contractField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Contract", IsNullable=true)]
+        public Contract[] Contract
+        {
+            get
+            {
+                return this.contractField;
+            }
+            set
+            {
+                this.contractField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("MSBuild", "17.4.0+18d5aef85920037c9d6ff49b1215a4daf515197f")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays", IsNullable=true)]
+    public partial class ArrayOfstring
+    {
+        
+        private string[] stringField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("string", IsNullable=true)]
+        public string[] @string
+        {
+            get
+            {
+                return this.stringField;
+            }
+            set
+            {
+                this.stringField = value;
             }
         }
     }

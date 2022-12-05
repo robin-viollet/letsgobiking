@@ -26,7 +26,7 @@ namespace RoutingServer
             return this.JCDecaux.GetAllContracts();
         }
 
-        MultipleCheckpointsItinary IServices.GetBestPath(Location startLocation, Location endLocation)
+        RequestResult IServices.GetBestPath(Location startLocation, Location endLocation)
         {
             Console.WriteLine("Request received : ");
             Console.WriteLine("\tStart location : " + startLocation);
@@ -37,10 +37,30 @@ namespace RoutingServer
                 /*startLocation = new Location("22 Rue Jacques Preiss", "Mulhouse", "France", "68100");
                 endLocation = new Location("44 Avenue Roger Salengro", "Mulhouse", "France", "68100");*/
 
-                List<Contract> contracts = this.JCDecaux.GetAllContracts();
-                Contract concernedContract = this.GetConcernedContract(startLocation, contracts);
+                RequestResult requestResult = new RequestResult();
 
-                List<Station> stationOfTheContract = this.JCDecaux.GetAllStations(concernedContract);
+                List<Contract> contracts = this.JCDecaux.GetAllContracts();
+                Contract departureContract = this.GetConcernedContract(startLocation, contracts);
+
+                if(departureContract == null)
+                {
+                    requestResult.errorMessage = "No contract found for the city of departure!";
+                    return requestResult;
+                }
+
+                Contract arrivalContract = this.GetConcernedContract(endLocation, contracts);
+                if (arrivalContract == null)
+                {
+                    requestResult.errorMessage = "No contract found for the city of arrival!";
+                    return requestResult;
+                }
+                else if(departureContract.name != arrivalContract.name)
+                {
+                    requestResult.errorMessage = "The departure and arrival cities don't belong to the same contract!";
+                    return requestResult;
+                }
+
+                List<Station> stationOfTheContract = this.JCDecaux.GetAllStations(departureContract);
 
                 GeoCoordinate startCoordinate = this.GetGeoCoordinate(startLocation);
                 Console.WriteLine(startCoordinate.Latitude + " | " + startCoordinate.Longitude);
@@ -54,21 +74,48 @@ namespace RoutingServer
                 Console.WriteLine("Pick up : " + pickUpStation.number + pickUpStation.address);
                 Console.WriteLine("Drop off : " + dropOffStation.number + dropOffStation.address);
 
-                List<Double[]> checkpointsCoordinates = new List<double[]>
+                Itinerary straightItineray = this.OpenRouteDirectionService.GetFootWalkingItinerary(
+                            this.GetCoordinates(startCoordinate),
+                            this.GetCoordinates(endCoordinate));
+
+                if (pickUpStation.number == dropOffStation.number)
                 {
-                    new double[] { startCoordinate.Longitude, startCoordinate.Latitude },
-                    new double[] { pickUpStation.position.longitude, pickUpStation.position.latitude },
-                    new double[] { dropOffStation.position.longitude, dropOffStation.position.latitude },
-                    new double[] { endCoordinate.Longitude, endCoordinate.Latitude }
+                    requestResult.itineraries = new Itinerary[] {straightItineray};
+                    return requestResult;
+                }
+
+                Itinerary itineraryToPickUpStation = this.OpenRouteDirectionService.GetFootWalkingItinerary(
+                            this.GetCoordinates(startCoordinate),
+                            this.GetCoordinates(pickUpStation)
+                            );
+
+                Itinerary bicycleItinerary = this.OpenRouteDirectionService.GetBikingItinerary(
+                            this.GetCoordinates(pickUpStation),
+                            this.GetCoordinates(dropOffStation)
+                            );
+
+                Itinerary itineraryToArrivalPoint = this.OpenRouteDirectionService.GetFootWalkingItinerary(
+                            this.GetCoordinates(dropOffStation),
+                            this.GetCoordinates(endCoordinate)
+                            );
+
+                double walkingDuration = itineraryToPickUpStation.GetTotalDuration() + 
+                    itineraryToArrivalPoint.GetTotalDuration();
+
+                if(walkingDuration > straightItineray.GetTotalDuration())
+                {
+                    requestResult.itineraries = new Itinerary[] { straightItineray };
+                    return requestResult;
+                }
+
+                requestResult.itineraries = new Itinerary[]
+                {
+                    itineraryToPickUpStation,
+                    bicycleItinerary,
+                    itineraryToArrivalPoint
                 };
 
-                Console.WriteLine(JsonSerializer.Serialize(checkpointsCoordinates));
-
-                MultipleCheckpointsItinary multipleCheckpointsItinary = this.OpenRouteDirectionService.GetFootWalkingItinerary(checkpointsCoordinates);
-
-                Console.WriteLine(JsonSerializer.Serialize(multipleCheckpointsItinary));
-
-                return multipleCheckpointsItinary;
+                return requestResult;
             }
             catch(Exception e)
             {
@@ -77,6 +124,16 @@ namespace RoutingServer
             }
 
             return null;
+        }
+
+        private String GetCoordinates(GeoCoordinate geoCoordinate)
+        {
+            return geoCoordinate.Longitude + "," + geoCoordinate.Latitude;
+        }
+
+        private String GetCoordinates(Station station)
+        {
+            return station.position.longitude + "," + station.position.latitude;
         }
 
         private Contract GetConcernedContract(Location location, List<Contract> contracts)
@@ -131,6 +188,11 @@ namespace RoutingServer
         {
             Place place = this.Nominatim.GetPlace(location);
             return new GeoCoordinate(Double.Parse(place.lat, CultureInfo.InvariantCulture), Double.Parse(place.lon, CultureInfo.InvariantCulture));
+        }
+
+        public ContractTypes.Station GetStation()
+        {
+            throw new NotImplementedException();
         }
     }
 }

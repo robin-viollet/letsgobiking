@@ -24,6 +24,7 @@ namespace ProxyCache
         public T Get<T>(string CacheItemName, DateTimeOffset dt) where T : class
         {
             Type type = typeof(T);
+
             if (!this.caches.TryGetValue(type, out MemoryCache cache))
             {
                 cache = new MemoryCache(type.Name);

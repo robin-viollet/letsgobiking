@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractCacheItem.cs" />
+    <Compile Include="JCDecauxContractsItem.cs" />
     <Compile Include="ServerMain.cs" />
     <Compile Include="ProxyCacheServicesProvider.cs" />
     <Compile Include="JCDecauxStationsItem.cs" />

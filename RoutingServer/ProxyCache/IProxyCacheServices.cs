@@ -10,5 +10,8 @@ namespace ProxyCache
     {
         [OperationContract]
         List<Station> GetStationsFromContract(String contractName);
+
+        [OperationContract]
+        List<Contract> GetAllContracts();
     }
 }

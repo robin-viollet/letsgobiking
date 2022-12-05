@@ -26,6 +26,7 @@
   <Metadata>
     <MetadataFile FileName="ProxyCacheServicesProvider.xsd" MetadataType="Schema" ID="4f8b6296-f489-47be-86d7-137e90e675e3" SourceId="1" SourceUrl="http://localhost:8751/Design_Time_Addresses/ProxyCache/ProxyCacheServicesProvider?xsd=xsd0" />
     <MetadataFile FileName="ProxyCacheServicesProvider1.xsd" MetadataType="Schema" ID="9300524a-9895-44f6-9f11-20a37c8e865e" SourceId="1" SourceUrl="http://localhost:8751/Design_Time_Addresses/ProxyCache/ProxyCacheServicesProvider?xsd=xsd2" />
+    <MetadataFile FileName="ProxyCacheServicesProvider3.xsd" MetadataType="Schema" ID="e9445ba0-fcb4-4912-b426-3890366b1327" SourceId="1" SourceUrl="http://localhost:8751/Design_Time_Addresses/ProxyCache/ProxyCacheServicesProvider?xsd=xsd3" />
     <MetadataFile FileName="ProxyCacheServicesProvider2.xsd" MetadataType="Schema" ID="993dafcb-3215-4db3-84dc-18c784236cd5" SourceId="1" SourceUrl="http://localhost:8751/Design_Time_Addresses/ProxyCache/ProxyCacheServicesProvider?xsd=xsd1" />
     <MetadataFile FileName="ProxyCacheServicesProvider.wsdl" MetadataType="Wsdl" ID="0af54c65-5c6d-496f-acfa-c72b5d4c9736" SourceId="1" SourceUrl="http://localhost:8751/Design_Time_Addresses/ProxyCache/ProxyCacheServicesProvider?wsdl" />
   </Metadata>

@@ -29,12 +29,12 @@ namespace RoutingServer
             return this.GetItinerary(startCoordinate, endCoordinate, "foot-walking");
         }
 
-        public Itinerary GetCyclingItinerary(String startCoordinate, String endCoordinate)
+        public Itinerary GetBikingItinerary(String startCoordinate, String endCoordinate)
         {
             return this.GetItinerary(startCoordinate, endCoordinate, "cycling-regular");
         }
 
-        private MultipleCheckpointsItinary PostItinerary(List<Double[]> checkpointsCoordinates, string profile)
+        /*private MultipleCheckpointsItinary PostItinerary(List<Double[]> checkpointsCoordinates, string profile)
         {
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, base.api_address + profile);
             httpRequestMessage.Headers.Add(HttpRequestHeader.Authorization.ToString(), OpenRouteDirectionService.ApiKey);
@@ -55,9 +55,9 @@ namespace RoutingServer
             return this.PostItinerary(checkpointsCoordinates, "foot-walking");
         }
 
-        public MultipleCheckpointsItinary GetCyclingItinerary(List<Double[]> checkpointsCoordinates)
+        public MultipleCheckpointsItinary GetBikingItinerary(List<Double[]> checkpointsCoordinates)
         {
             return this.PostItinerary(checkpointsCoordinates, "cycling-regular");
-        }
+        }*/
     }
 }
