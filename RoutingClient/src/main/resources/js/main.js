@@ -28,7 +28,7 @@ this.map.addLayer(vectorLayer);*/
 // map.addLayer(mapnik);
 
 const map = new ol.Map({
-    target: 'Map',
+    target: 'map',
     layers: [
         new ol.layer.Tile({
             source: new ol.source.OSM(),
