@@ -27,14 +27,18 @@ namespace ProxyCache
 
             if (!this.caches.TryGetValue(type, out MemoryCache cache))
             {
+                Console.WriteLine("Instantiate new memory cache : " + type.Name);
                 cache = new MemoryCache(type.Name);
+                Console.Write(this.caches.Count);
                 this.caches.Add(type, cache);
+                Console.Write(this.caches.Count);
             }
 
             T result = (T) cache.Get(CacheItemName);
 
             if (result == null)
             {
+                Console.WriteLine("Instantiate new cache item : " + CacheItemName);
                 result = (T) Activator.CreateInstance(type, CacheItemName);
             }
 

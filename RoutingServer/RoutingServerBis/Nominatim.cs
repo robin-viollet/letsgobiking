@@ -20,7 +20,13 @@ namespace RoutingServer
                 { "postalcode", location.postalCode }
             };
 
-            return base.SendGetRequest<List<Place>>(keysAndValues: keyValuePairs)[0];
+            List<Place> places = base.SendGetRequest<List<Place>>(keysAndValues: keyValuePairs);
+            if (places.Count == 0)
+            {
+                throw new CantFindAddressException("The address " + location.ToString() + " can not be found!");
+            }
+
+            return places[0];
         }
     }
 }

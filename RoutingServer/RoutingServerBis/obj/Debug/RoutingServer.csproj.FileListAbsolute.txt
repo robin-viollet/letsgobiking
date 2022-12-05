@@ -26,3 +26,8 @@ C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.csproj.SuggestedBindingRedirects.cache
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\RoutingServer.exe
 C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\obj\Debug\XsdGeneratedCode\GeneratedXsdTypes.cs
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\Apache.NMS.ActiveMQ.dll
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\Apache.NMS.dll
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\ICSharpCode.SharpZipLib.pdb
+C:\Users\guiot\Documents\Projet\letsgobiking\RoutingServer\RoutingServerBis\bin\Debug\ICSharpCode.SharpZipLib.xml

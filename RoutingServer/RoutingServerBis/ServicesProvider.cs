@@ -1,15 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Globalization;
 using System.Device.Location;
 using RoutingServer.IProxyCacheServices;
+using Apache.NMS.ActiveMQ;
+using Apache.NMS;
 
 namespace RoutingServer
 {
     public class ServicesProvider : IServices
     {
+        private static readonly NumberFormatInfo numberFormatInfo = new NumberFormatInfo();
+
+        static ServicesProvider()
+        {
+            numberFormatInfo.NumberDecimalSeparator = ".";
+        }
+
+        private int queueId = 0;
+        private ISession session;
+
         private readonly JCDecaux JCDecaux;
         private readonly Nominatim Nominatim;
         private readonly OpenRouteDirectionService OpenRouteDirectionService;
@@ -19,6 +30,16 @@ namespace RoutingServer
             this.JCDecaux = new JCDecaux();
             this.Nominatim = new Nominatim();
             this.OpenRouteDirectionService= new OpenRouteDirectionService();
+
+            Uri connecturi = new Uri("activemq:tcp://localhost:61616");
+            ConnectionFactory connectionFactory = new ConnectionFactory(connecturi);
+
+            // Create a single Connection from the Connection Factory.
+            IConnection connection = connectionFactory.CreateConnection();
+            connection.Start();
+
+            // Create a session from the Connection.
+            this.session = connection.CreateSession();
         }
 
         public List<Contract> GetAllContracts()
@@ -74,50 +95,24 @@ namespace RoutingServer
                 Console.WriteLine("Pick up : " + pickUpStation.number + pickUpStation.address);
                 Console.WriteLine("Drop off : " + dropOffStation.number + dropOffStation.address);
 
-                Itinerary straightItineray = this.OpenRouteDirectionService.GetFootWalkingItinerary(
-                            this.GetCoordinates(startCoordinate),
-                            this.GetCoordinates(endCoordinate));
+                Itinerary[] bestItinerary = this.GetBestItinerary(startCoordinate, endCoordinate,
+                                                                    pickUpStation, dropOffStation);
 
-                if (pickUpStation.number == dropOffStation.number)
-                {
-                    requestResult.itineraries = new Itinerary[] {straightItineray};
-                    return requestResult;
-                }
+                requestResult.itineraries = bestItinerary;
 
-                Itinerary itineraryToPickUpStation = this.OpenRouteDirectionService.GetFootWalkingItinerary(
-                            this.GetCoordinates(startCoordinate),
-                            this.GetCoordinates(pickUpStation)
-                            );
-
-                Itinerary bicycleItinerary = this.OpenRouteDirectionService.GetBikingItinerary(
-                            this.GetCoordinates(pickUpStation),
-                            this.GetCoordinates(dropOffStation)
-                            );
-
-                Itinerary itineraryToArrivalPoint = this.OpenRouteDirectionService.GetFootWalkingItinerary(
-                            this.GetCoordinates(dropOffStation),
-                            this.GetCoordinates(endCoordinate)
-                            );
-
-                double walkingDuration = itineraryToPickUpStation.GetTotalDuration() + 
-                    itineraryToArrivalPoint.GetTotalDuration();
-
-                if(walkingDuration > straightItineray.GetTotalDuration())
-                {
-                    requestResult.itineraries = new Itinerary[] { straightItineray };
-                    return requestResult;
-                }
-
-                requestResult.itineraries = new Itinerary[]
-                {
-                    itineraryToPickUpStation,
-                    bicycleItinerary,
-                    itineraryToArrivalPoint
-                };
+                requestResult.instructionQueueId = this.CreateQueueWithInstructions(bestItinerary);
 
                 return requestResult;
             }
-            catch(Exception e)
+            catch (CantFindAddressException e)
+            {
+                Console.WriteLine(e.Message);
+                return new RequestResult
+                {
+                    errorMessage = e.Message
+                };
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
@@ -126,14 +121,85 @@ namespace RoutingServer
             return null;
         }
 
+        private Itinerary[] GetBestItinerary(GeoCoordinate startCoordinate, GeoCoordinate endCoordinate, Station pickUpStation, Station dropOffStation)
+        {
+            Itinerary straightItineray = this.OpenRouteDirectionService.GetFootWalkingItinerary(
+                            this.GetCoordinates(startCoordinate),
+                            this.GetCoordinates(endCoordinate));
+
+            if (pickUpStation.number == dropOffStation.number)
+            {
+                return new Itinerary[] { straightItineray };
+            }
+
+            Itinerary itineraryToPickUpStation = this.OpenRouteDirectionService.GetFootWalkingItinerary(
+                        this.GetCoordinates(startCoordinate),
+                        this.GetCoordinates(pickUpStation)
+                        );
+
+            Itinerary bicycleItinerary = this.OpenRouteDirectionService.GetBikingItinerary(
+                        this.GetCoordinates(pickUpStation),
+                        this.GetCoordinates(dropOffStation)
+                        );
+
+            Itinerary itineraryToArrivalPoint = this.OpenRouteDirectionService.GetFootWalkingItinerary(
+                        this.GetCoordinates(dropOffStation),
+                        this.GetCoordinates(endCoordinate)
+                        );
+
+            double walkingDuration = itineraryToPickUpStation.GetTotalDuration() +
+                itineraryToArrivalPoint.GetTotalDuration();
+
+            if (walkingDuration > straightItineray.GetTotalDuration())
+            {
+                return new Itinerary[] { straightItineray };
+            }
+
+            return new Itinerary[]
+            {
+                    itineraryToPickUpStation,
+                    bicycleItinerary,
+                    itineraryToArrivalPoint
+            };
+        }
+
+        private String CreateQueueWithInstructions(Itinerary[] itineraries)
+        {
+            // Use the session to target a queue.
+            IDestination destination = session.GetQueue("" + queueId);
+
+            // Create a Producer targetting the selected queue.
+            IMessageProducer producer = session.CreateProducer(destination);
+            // You may configure everything to your needs, for instance:
+            producer.DeliveryMode = MsgDeliveryMode.NonPersistent;
+
+            foreach(Itinerary itinerary in itineraries)
+            {
+                foreach(Feature feature in itinerary.features)
+                {
+                    foreach(Segment segment in feature.properties.segments)
+                    {
+                        foreach(Step step in segment.steps)
+                        {
+                            producer.Send(this.session.CreateTextMessage(step.instruction));
+                        }
+                    }
+                }
+            }
+
+            producer.Close();
+
+            return "" + (++this.queueId);
+        }
+
         private String GetCoordinates(GeoCoordinate geoCoordinate)
         {
-            return geoCoordinate.Longitude + "," + geoCoordinate.Latitude;
+            return geoCoordinate.Longitude.ToString(numberFormatInfo) + "," + geoCoordinate.Latitude.ToString(numberFormatInfo);
         }
 
         private String GetCoordinates(Station station)
         {
-            return station.position.longitude + "," + station.position.latitude;
+            return station.position.longitude.ToString(numberFormatInfo) + "," + station.position.latitude.ToString(numberFormatInfo);
         }
 
         private Contract GetConcernedContract(Location location, List<Contract> contracts)
@@ -188,11 +254,6 @@ namespace RoutingServer
         {
             Place place = this.Nominatim.GetPlace(location);
             return new GeoCoordinate(Double.Parse(place.lat, CultureInfo.InvariantCulture), Double.Parse(place.lon, CultureInfo.InvariantCulture));
-        }
-
-        public ContractTypes.Station GetStation()
-        {
-            throw new NotImplementedException();
         }
     }
 }

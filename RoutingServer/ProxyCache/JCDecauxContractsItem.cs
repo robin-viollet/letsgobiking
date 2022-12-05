@@ -11,7 +11,10 @@ namespace ProxyCache
     {
         private static readonly String ApiUrl = "https://api.jcdecaux.com/vls/v3/contracts?apiKey=ac8828262f441bebc10d8f59f3aa109399f6f66b";
 
-        public JCDecauxContractsItem(String useless) : base(ApiUrl) { }
+        public JCDecauxContractsItem(String useless) : base(ApiUrl)
+        {
+            Console.WriteLine("Sending a request to obtain all contracts");
+        }
     }
 
     [DataContract]

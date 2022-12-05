@@ -9,14 +9,20 @@ namespace RoutingServer
 {
     internal class RequestHelper
     {
-        protected readonly HttpClient client;
+        protected static readonly HttpClient client;
         protected readonly String api_address;
         protected readonly String apiKeyAndValue = null;
 
+        static RequestHelper()
+        {
+            client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "C# App");
+            client.MaxResponseContentBufferSize = int.MaxValue;
+            
+        }
+
         public RequestHelper(String api_address)
         {
-            this.client = new HttpClient();
-            this.client.DefaultRequestHeaders.Add("User-Agent", "C# App");
             this.api_address = api_address;
         }
 
@@ -43,7 +49,7 @@ namespace RoutingServer
             }
             Console.WriteLine("Send request : " + request);
 
-            HttpResponseMessage response = this.client.GetAsync(request).Result;
+            HttpResponseMessage response = client.GetAsync(request).Result;
 
             Console.WriteLine("Status code : " + response.StatusCode);
             response.EnsureSuccessStatusCode();
@@ -55,7 +61,7 @@ namespace RoutingServer
 
         protected T SendPostRequest<T>(HttpRequestMessage httpRequestMessage)
         {
-            HttpResponseMessage response = this.client.SendAsync(httpRequestMessage).Result;
+            HttpResponseMessage response = client.SendAsync(httpRequestMessage).Result;
 
             response.EnsureSuccessStatusCode();
 

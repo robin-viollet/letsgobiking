@@ -28,6 +28,9 @@ namespace RoutingServer
 
         [DataMember]
         public Itinerary[] itineraries { get; set; }
+
+        [DataMember]
+        public String instructionQueueId { get; set; }
     }
 
     [DataContract]
