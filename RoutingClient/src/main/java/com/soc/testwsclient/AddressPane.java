@@ -37,6 +37,11 @@ public class AddressPane extends GridPane {
         setHgap(Columbus.GAP);
     }
 
+    public void selectFirstCity(){
+//        city.s
+        city.getSelectionModel().selectFirst();
+    }
+
     public Location toLocation(){
         ObjectFactory objectFactory = new  ObjectFactory();
 

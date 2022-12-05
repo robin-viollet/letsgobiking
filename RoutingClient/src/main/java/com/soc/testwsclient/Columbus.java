@@ -1,14 +1,14 @@
 package com.soc.testwsclient;
 
-import com.soap.ws.client.generated.IServices;
-import com.soap.ws.client.generated.Location;
-import com.soap.ws.client.generated.ServicesProvider;
+import com.soap.ws.client.generated.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -16,7 +16,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-import java.util.stream.Collectors;
 import java.util.List;
 
 public class Columbus extends Application {
@@ -36,13 +35,18 @@ public class Columbus extends Application {
     private static final int ARRIVAL_H_START = DEPARTURE_H_START;
     private static final int ARRIVAL_WIDTH = DEPARTURE_WIDTH;
     private static final int ARRIVAL_HEIGHT = DEPARTURE_HEIGHT;
-    private static final int CONTRACT_WIDTH = 2;
-    private static final int CONTRACT_HEIGHT = 1;
+    private static final int CONTRACTS_W_START = ARRIVAL_W_START + ARRIVAL_WIDTH;
+    private static final int CONTRACTS_H_START = DEPARTURE_H_START;
+    private static final int CONTRACTS_WIDTH = 2;
+    private static final int CONTRACTS_HEIGHT = 1;
+    private static final int CALCULATE_W_START = CONTRACTS_W_START + CONTRACTS_WIDTH;
+    private static final int CALCULATE_H_START = DEPARTURE_H_START;
 
     private AddressPane departure;
     private AddressPane arrival;
-    private ComboBox<String> contracts;
+    private ComboBox<Contract> contracts;
     private Button calculate;
+    private Label info;
 
     public static void main(String[] args) {
         launch(args);
@@ -52,9 +56,9 @@ public class Columbus extends Application {
     public void start(Stage stage) throws Exception {
         ServicesProvider server = new ServicesProvider();
         IServices serverServices = server.getBasicHttpBindingIServices();
-        var cities = FXCollections.observableArrayList("Lyon");
+        ObservableList<String> cities = FXCollections.observableArrayList();
 
-        List<String> contractsList = serverServices.getContracts().getContract().stream().map(c -> c.getCommercialName().getValue()).collect(Collectors.toList());
+        List<Contract> contractsList = serverServices.getAllContracts().getContract();
 
         WebView webView = new WebView();
         final WebEngine webEngine = webView.getEngine();
@@ -76,25 +80,45 @@ public class Columbus extends Application {
         arrival = new AddressPane("Arrival", cities);
         contracts = new ComboBox<>(FXCollections.observableArrayList(contractsList));
         calculate = new Button("Calculate!");
+        info = new Label();
 
+        contracts.setConverter(new ContractConverter(contractsList));
+        contracts.valueProperty().addListener((observableValue, oldContract, newContract) -> {
+            cities.clear();
+            ArrayOfstring contratCities = newContract.getCities().getValue();
+
+            if (contratCities != null) {
+                cities.addAll(contratCities.getString());
+                departure.selectFirstCity();
+                arrival.selectFirstCity();
+            }
+        });
         contracts.getSelectionModel().selectFirst();
+
         calculate.setOnAction(actionEvent -> {
+            info.setText("");
             Location startLocation = departure.toLocation();
             Location endLocation = arrival.toLocation();
 
             System.out.println(startLocation);
             System.out.println(endLocation);
             var path = serverServices.getBestPath(startLocation, endLocation);
-            var route = path.getRoutes().getValue().getRoute().get(0).getGeometry().getValue();
-            webEngine.executeScript("setRoute(\"" + route + "\");");
-            System.out.println(route);
+
+            if (path != null) {
+                var route = path.getRoutes().getValue().getRoute().get(0).getGeometry().getValue();
+                System.out.println(route);
+                webEngine.executeScript("setRoute(\"" + route.replaceAll("\\\\", "\\\\\\\\") + "\");");
+            } else {
+                info.setText("Could not find path.");
+            }
         });
 
         root.add(webView, MAP_W_START, MAP_H_START, MAP_WIDTH, MAP_HEIGHT);
         root.add(departure, DEPARTURE_W_START, DEPARTURE_H_START, DEPARTURE_WIDTH, DEPARTURE_HEIGHT);
         root.add(arrival, ARRIVAL_W_START, ARRIVAL_H_START, ARRIVAL_WIDTH, ARRIVAL_HEIGHT);
-        root.add(contracts, DEPARTURE_WIDTH + ARRIVAL_WIDTH, DEPARTURE_H_START, CONTRACT_WIDTH, CONTRACT_HEIGHT);
-        root.add(calculate, DEPARTURE_WIDTH + ARRIVAL_WIDTH + CONTRACT_WIDTH, MAP_HEIGHT);
+        root.add(contracts, CONTRACTS_W_START, CONTRACTS_H_START, CONTRACTS_WIDTH, CONTRACTS_HEIGHT);
+        root.add(calculate, CALCULATE_W_START, CALCULATE_H_START);
+        root.add(info, CALCULATE_W_START + 1, CALCULATE_H_START);
 
         GridPane.setMargin(departure, new Insets(GAP));
         GridPane.setMargin(arrival, new Insets(GAP));
