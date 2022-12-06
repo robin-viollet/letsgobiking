@@ -6,7 +6,9 @@ module com.soc.testwsclient {
     requires java.jws;
     requires java.xml.ws;
     requires java.desktop;
+    requires java.naming;
     requires gmbal;
+    requires activemq.all;
 
     exports com.soap.ws.client.generated to com.sun.xml.ws;
 

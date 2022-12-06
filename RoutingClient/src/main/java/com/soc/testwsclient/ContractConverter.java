@@ -13,7 +13,7 @@ public class ContractConverter extends StringConverter<Contract> {
     }
     @Override
     public String toString(Contract contract) {
-        return contract.getCommercialName().getValue() + " (" + contract.getName().getValue() + ")";
+        return contract == null ? "null" : contract.getCommercialName().getValue() + " (" + contract.getName().getValue() + ")";
     }
 
     @Override

@@ -18,6 +18,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import javax.jms.JMSException;
 import java.util.List;
 
 public class Columbus extends Application {
@@ -43,6 +44,8 @@ public class Columbus extends Application {
     private static final int CONTRACTS_HEIGHT = 1;
     private static final int CALCULATE_W_START = CONTRACTS_W_START + CONTRACTS_WIDTH;
     private static final int CALCULATE_H_START = DEPARTURE_H_START;
+
+    private ActiveMQConsumer activeMQConsumer;
 
     private GridPane root;
     private AddressPane departure;
@@ -102,10 +105,39 @@ public class Columbus extends Application {
         contracts.valueProperty().addListener(new ContractsListener(cities, departure, arrival));
         contracts.getSelectionModel().selectFirst();
 
-        calculate.setOnAction(new CalculateButtonAction(
-                serverServices,
-                webEngine, info,
-                departure, arrival));
+//        calculate.setOnAction(new CalculateButtonAction(
+//                serverServices,
+//                webEngine, info,
+//                departure, arrival));
+
+        RouteHandler routeHandler = new RouteHandler(webEngine);
+
+        calculate.setOnAction(actionEvent -> {
+            info.setText("");
+
+            System.out.println("Retrieving path...");
+
+            var path = serverServices.getBestPath(departure.toLocation(), arrival.toLocation());
+
+            System.out.println("Path retrieved.");
+
+            if (path == null || !routeHandler.displayPath(path)){
+                info.setText("Could not find path.");
+            }
+
+
+            /*try {
+                    activeMQConsumer = new ActiveMQConsumer(path.getInstructionQueueId().getValue());
+                    nextStepButton.setDisable(false);
+                } catch (JMSException e) {
+                    throw new RuntimeException(e);
+                }*/
+
+
+                /*var route = path.getItineraries().getValue().getItinerary().get(0).getRoutes().getValue().getRoute().get(0).getGeometry().getValue();
+                System.out.println(route);
+                webEngine.executeScript("setRoute(\"" + route.replaceAll("\\\\", "\\\\\\\\") + "\");");*/
+        });
 
         root.add(webView, MAP_W_START, MAP_H_START, MAP_WIDTH, MAP_HEIGHT);
         root.add(departure, DEPARTURE_W_START, DEPARTURE_H_START, DEPARTURE_WIDTH, DEPARTURE_HEIGHT);
