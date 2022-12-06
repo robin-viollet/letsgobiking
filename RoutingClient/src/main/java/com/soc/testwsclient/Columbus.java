@@ -90,6 +90,13 @@ public class Columbus extends Application {
         nextStepButton = new Button("Next Step");
 
         nextStepButton.setDisable(true);
+        nextStepButton.setOnAction(actionEvent -> {
+            try {
+                nextStep.setText(activeMQConsumer.consumeMessage());
+            } catch (JMSException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         contracts.setConverter(new ContractConverter(contractsList));
         contracts.valueProperty().addListener(new ContractsListener(cities, departure, arrival));

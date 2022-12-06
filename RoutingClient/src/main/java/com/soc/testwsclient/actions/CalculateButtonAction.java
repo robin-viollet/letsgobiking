@@ -28,8 +28,8 @@ public class CalculateButtonAction implements EventHandler<ActionEvent> {
 
         var path = serverServices.getBestPath(departure.toLocation(), arrival.toLocation());
 
-        if (path != null) {
-            var route = path.getRoutes().getValue().getRoute().get(0).getGeometry().getValue();
+        if (path != null){
+            var route = path.getItineraries().getValue().getItinerary().get(0).getRoutes().getValue().getRoute().get(0).getGeometry().getValue();
             System.out.println(route);
             webEngine.executeScript("setRoute(\"" + route.replaceAll("\\\\", "\\\\\\\\") + "\");");
         } else {
