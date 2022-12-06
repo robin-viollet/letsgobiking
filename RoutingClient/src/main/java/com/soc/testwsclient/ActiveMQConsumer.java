@@ -43,8 +43,6 @@ public class ActiveMQConsumer implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
-        messageConsumer.close();
-        consumerSession.close();
         consumerConnection.close();
     }
 }
