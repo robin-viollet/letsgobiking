@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -92,6 +93,8 @@ public class Columbus extends Application {
         info = new Label("");
         nextStep = new Label("No next step.");
         nextStepButton = new Button("Next Step");
+
+        info.setTextFill(Color.RED);
 
         nextStepButton.setDisable(true);
         nextStepButton.setOnAction(actionEvent -> {
