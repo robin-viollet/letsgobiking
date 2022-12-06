@@ -1,0 +1,27 @@
+<publishData>
+  <publishTarget publishUrl="C:\Users\guiot\Documents\Projet\letsgobiking\">
+    <file relUrl="Web.config" publishTime="12/05/2022 18:45:27" />
+    <file relUrl="bin/System.Text.Encodings.Web.dll" publishTime="10/18/2022 18:31:48" />
+    <file relUrl="bin/System.Text.Encodings.Web.xml" publishTime="10/11/2022 00:07:02" />
+    <file relUrl="bin/System.Buffers.dll" publishTime="02/19/2020 11:05:18" />
+    <file relUrl="bin/System.Text.Json.xml" publishTime="10/11/2022 00:07:02" />
+    <file relUrl="bin/System.ValueTuple.dll" publishTime="05/15/2018 15:29:52" />
+    <file relUrl="bin/System.Numerics.Vectors.dll" publishTime="05/15/2018 15:29:44" />
+    <file relUrl="ProxyCache.ProxyCacheServicesProvider.svc" publishTime="12/06/2022 10:49:43" />
+    <file relUrl="bin/ProxyCache.pdb" publishTime="12/06/2022 10:34:15" />
+    <file relUrl="bin/Microsoft.Bcl.AsyncInterfaces.xml" publishTime="10/18/2022 18:19:40" />
+    <file relUrl="bin/System.Threading.Tasks.Extensions.xml" publishTime="02/19/2020 11:05:18" />
+    <file relUrl="bin/System.Buffers.xml" publishTime="02/19/2020 11:05:18" />
+    <file relUrl="bin/System.Runtime.CompilerServices.Unsafe.dll" publishTime="10/23/2021 01:40:18" />
+    <file relUrl="bin/System.Text.Json.dll" publishTime="10/18/2022 18:32:04" />
+    <file relUrl="bin/System.Threading.Tasks.Extensions.dll" publishTime="02/19/2020 11:05:18" />
+    <file relUrl="bin/ProxyCache.exe" publishTime="12/06/2022 10:34:15" />
+    <file relUrl="bin/System.Memory.xml" publishTime="05/08/2022 05:31:02" />
+    <file relUrl="bin/System.Memory.dll" publishTime="05/08/2022 05:31:02" />
+    <file relUrl="bin/System.ValueTuple.xml" publishTime="05/15/2018 15:29:52" />
+    <file relUrl="bin/Microsoft.Bcl.AsyncInterfaces.dll" publishTime="10/18/2022 18:19:40" />
+    <file relUrl="bin/ProxyCache.exe.config" publishTime="12/05/2022 18:45:27" />
+    <file relUrl="bin/System.Numerics.Vectors.xml" publishTime="05/15/2018 15:29:44" />
+    <file relUrl="bin/System.Runtime.CompilerServices.Unsafe.xml" publishTime="10/19/2021 09:14:20" />
+  </publishTarget>
+</publishData>

@@ -14,7 +14,7 @@ namespace RoutingServer
         public OpenRouteDirectionService() : base("https://api.openrouteservice.org/v2/directions/", "api_key", OpenRouteDirectionService.ApiKey)
         { }
 
-        private Itinerary GetItinerary(String startCoordinate, String endCoordinate, string profile)
+        /*private Itinerary GetItinerary(String startCoordinate, String endCoordinate, string profile)
         {
             Dictionary<String, String> keyValuePairs = new Dictionary<String, String>
             {
@@ -32,9 +32,9 @@ namespace RoutingServer
         public Itinerary GetBikingItinerary(String startCoordinate, String endCoordinate)
         {
             return this.GetItinerary(startCoordinate, endCoordinate, "cycling-regular");
-        }
+        }*/
 
-        /*private MultipleCheckpointsItinary PostItinerary(List<Double[]> checkpointsCoordinates, string profile)
+        private Itinerary PostItinerary(List<Double[]> checkpointsCoordinates, string profile)
         {
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, base.api_address + profile);
             httpRequestMessage.Headers.Add(HttpRequestHeader.Authorization.ToString(), OpenRouteDirectionService.ApiKey);
@@ -47,17 +47,17 @@ namespace RoutingServer
             }), Encoding.UTF8, "application/json");
             httpRequestMessage.Content = content;
 
-            return base.SendPostRequest<MultipleCheckpointsItinary>(httpRequestMessage);
+            return base.SendPostRequest<Itinerary>(httpRequestMessage);
         }
 
-        public MultipleCheckpointsItinary GetFootWalkingItinerary(List<Double[]> checkpointsCoordinates)
+        public Itinerary GetFootWalkingItinerary(List<Double[]> checkpointsCoordinates)
         {
             return this.PostItinerary(checkpointsCoordinates, "foot-walking");
         }
 
-        public MultipleCheckpointsItinary GetBikingItinerary(List<Double[]> checkpointsCoordinates)
+        public Itinerary GetBikingItinerary(List<Double[]> checkpointsCoordinates)
         {
             return this.PostItinerary(checkpointsCoordinates, "cycling-regular");
-        }*/
+        }
     }
 }

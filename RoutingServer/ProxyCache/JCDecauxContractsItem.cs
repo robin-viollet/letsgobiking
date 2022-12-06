@@ -13,7 +13,7 @@ namespace ProxyCache
 
         public JCDecauxContractsItem(String useless) : base(ApiUrl)
         {
-            Console.WriteLine("Sending a request to obtain all contracts");
+            Console.WriteLine("Sending a request to obtain all contracts.");
         }
     }
 

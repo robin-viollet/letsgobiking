@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.Web.Routing;
 
 namespace RoutingServer
 {
@@ -63,47 +64,34 @@ namespace RoutingServer
     public class Itinerary
     {
         [DataMember]
-        public string type { get; set; }
-        [DataMember]
-        public List<Feature> features { get; set; }
+        public List<Route> routes { get; set; }
         [DataMember]
         public List<double> bbox { get; set; }
-        [DataMember]
-        public Metadata metadata { get; set; }
 
         public double GetTotalDuration()
         {
             double totalDuration = 0;
-            foreach (Feature feature in features)
+            foreach (Route route in routes)
             {
-                totalDuration += feature.properties.summary.duration;
+                totalDuration += route.summary.duration;
             }
             return totalDuration;
         }
     }
 
     [DataContract]
-    public class Engine
+    public class Route
     {
         [DataMember]
-        public string version { get; set; }
+        public Summary summary { get; set; }
         [DataMember]
-        public DateTime build_date { get; set; }
-        [DataMember]
-        public DateTime graph_date { get; set; }
-    }
-
-    [DataContract]
-    public class Feature
-    {
+        public List<Segment> segments { get; set; }
         [DataMember]
         public List<double> bbox { get; set; }
         [DataMember]
-        public string type { get; set; }
+        public string geometry { get; set; }
         [DataMember]
-        public Properties properties { get; set; }
-        [DataMember]
-        public Geometry geometry { get; set; }
+        public List<int> way_points { get; set; }
     }
 
     [DataContract]
@@ -116,21 +104,6 @@ namespace RoutingServer
     }
 
     [DataContract]
-    public class Metadata
-    {
-        [DataMember]
-        public string attribution { get; set; }
-        [DataMember]
-        public string service { get; set; }
-        [DataMember]
-        public long timestamp { get; set; }
-        [DataMember]
-        public Query query { get; set; }
-        [DataMember]
-        public Engine engine { get; set; }
-    }
-
-    [DataContract]
     public class Properties
     {
         [DataMember]
@@ -139,17 +112,6 @@ namespace RoutingServer
         public Summary summary { get; set; }
         [DataMember]
         public List<int> way_points { get; set; }
-    }
-
-    [DataContract]
-    public class Query
-    {
-        [DataMember]
-        public List<List<double>> coordinates { get; set; }
-        [DataMember]
-        public string profile { get; set; }
-        [DataMember]
-        public string format { get; set; }
     }
 
     [DataContract]

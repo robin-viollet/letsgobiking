@@ -55,9 +55,6 @@ namespace RoutingServer
 
             try
             {
-                /*startLocation = new Location("22 Rue Jacques Preiss", "Mulhouse", "France", "68100");
-                endLocation = new Location("44 Avenue Roger Salengro", "Mulhouse", "France", "68100");*/
-
                 RequestResult requestResult = new RequestResult();
 
                 List<Contract> contracts = this.JCDecaux.GetAllContracts();
@@ -123,9 +120,13 @@ namespace RoutingServer
 
         private Itinerary[] GetBestItinerary(GeoCoordinate startCoordinate, GeoCoordinate endCoordinate, Station pickUpStation, Station dropOffStation)
         {
+
             Itinerary straightItineray = this.OpenRouteDirectionService.GetFootWalkingItinerary(
-                            this.GetCoordinates(startCoordinate),
-                            this.GetCoordinates(endCoordinate));
+                    new List<Double[]>
+                    {
+                        this.GetCoordinatesArray(startCoordinate),
+                        this.GetCoordinatesArray(endCoordinate)
+                    });
 
             if (pickUpStation.number == dropOffStation.number)
             {
@@ -133,19 +134,25 @@ namespace RoutingServer
             }
 
             Itinerary itineraryToPickUpStation = this.OpenRouteDirectionService.GetFootWalkingItinerary(
-                        this.GetCoordinates(startCoordinate),
-                        this.GetCoordinates(pickUpStation)
-                        );
+                    new List<Double[]>
+                    {
+                        this.GetCoordinatesArray(startCoordinate),
+                        this.GetCoordinatesArray(pickUpStation)
+                    });
 
             Itinerary bicycleItinerary = this.OpenRouteDirectionService.GetBikingItinerary(
-                        this.GetCoordinates(pickUpStation),
-                        this.GetCoordinates(dropOffStation)
-                        );
+                    new List<Double[]>
+                    {
+                        this.GetCoordinatesArray(pickUpStation),
+                        this.GetCoordinatesArray(dropOffStation)
+                    });
 
             Itinerary itineraryToArrivalPoint = this.OpenRouteDirectionService.GetFootWalkingItinerary(
-                        this.GetCoordinates(dropOffStation),
-                        this.GetCoordinates(endCoordinate)
-                        );
+                    new List<Double[]>
+                    {
+                        this.GetCoordinatesArray(dropOffStation),
+                        this.GetCoordinatesArray(endCoordinate)
+                    });
 
             double walkingDuration = itineraryToPickUpStation.GetTotalDuration() +
                 itineraryToArrivalPoint.GetTotalDuration();
@@ -175,9 +182,9 @@ namespace RoutingServer
 
             foreach(Itinerary itinerary in itineraries)
             {
-                foreach(Feature feature in itinerary.features)
+                foreach(Route route in itinerary.routes)
                 {
-                    foreach(Segment segment in feature.properties.segments)
+                    foreach(Segment segment in route.segments)
                     {
                         foreach(Step step in segment.steps)
                         {
@@ -192,15 +199,25 @@ namespace RoutingServer
             return "" + (++this.queueId);
         }
 
-        private String GetCoordinates(GeoCoordinate geoCoordinate)
+        private String GetCoordinatesString(GeoCoordinate geoCoordinate)
         {
             return geoCoordinate.Longitude.ToString(numberFormatInfo) + "," + geoCoordinate.Latitude.ToString(numberFormatInfo);
         }
 
-        private String GetCoordinates(Station station)
+        private String GetCoordinatesString(Station station)
         {
             return station.position.longitude.ToString(numberFormatInfo) + "," + station.position.latitude.ToString(numberFormatInfo);
         }
+
+        private double[] GetCoordinatesArray(GeoCoordinate geoCoordinate)
+        {
+            return new double[] { geoCoordinate.Longitude, geoCoordinate.Latitude};
+        }
+
+        private double[] GetCoordinatesArray(Station station)
+        {
+            return new double[] { station.position.longitude, station.position.latitude};
+        } 
 
         private Contract GetConcernedContract(Location location, List<Contract> contracts)
         {

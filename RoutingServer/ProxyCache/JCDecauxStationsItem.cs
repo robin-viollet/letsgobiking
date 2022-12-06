@@ -9,7 +9,7 @@ namespace ProxyCache
         private static readonly String ApiUrl = "https://api.jcdecaux.com/vls/v3/stations?apiKey=ac8828262f441bebc10d8f59f3aa109399f6f66b&contract=";
 
         public JCDecauxStationsItem(String contract) : base(ApiUrl + contract){
-            Console.WriteLine("Send a request to obtain stations from the contract : " + contract);
+            Console.WriteLine("Send a request to obtain stations from the contract : " + contract + ".");
             foreach(Station s in base.GetItemContent()){
                 s.SetCanPickUpABike();
                 s.SetCanDropOffABike();

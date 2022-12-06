@@ -29,9 +29,7 @@ namespace ProxyCache
             {
                 Console.WriteLine("Instantiate new memory cache : " + type.Name);
                 cache = new MemoryCache(type.Name);
-                Console.Write(this.caches.Count);
                 this.caches.Add(type, cache);
-                Console.Write(this.caches.Count);
             }
 
             T result = (T) cache.Get(CacheItemName);
