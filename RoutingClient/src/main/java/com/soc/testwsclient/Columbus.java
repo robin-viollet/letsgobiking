@@ -174,7 +174,10 @@ public class Columbus extends Application {
     public void stop() throws Exception {
         super.stop();
 
-        activeMQConsumer.close();
+        if (activeMQConsumer != null) {
+            activeMQConsumer.close();
+        }
+
         System.exit(0);
     }
 }
