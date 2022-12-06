@@ -47,6 +47,9 @@ public class Columbus extends Application {
     private static final int CALCULATE_W_START = CONTRACTS_W_START + CONTRACTS_WIDTH;
     private static final int CALCULATE_H_START = DEPARTURE_H_START;
 
+    private static final String NO_NEXT_STEP = "No next step.";
+    private static final String COULD_NOT_CONNECT_TO_ACTIVEMQ = "Could not connect to ActiveMQ.";
+
     private ActiveMQConsumer activeMQConsumer;
 
     private GridPane root;
@@ -91,7 +94,7 @@ public class Columbus extends Application {
         contracts = new ComboBox<>(FXCollections.observableArrayList(contractsList));
         calculate = new Button("Calculate!");
         info = new Label("");
-        nextStep = new Label("No next step.");
+        nextStep = new Label(NO_NEXT_STEP);
         nextStepButton = new Button("Next Step");
 
         info.setTextFill(Color.RED);
@@ -101,7 +104,8 @@ public class Columbus extends Application {
             try {
                 nextStep.setText(activeMQConsumer.consumeMessage());
             } catch (JMSException e) {
-                throw new RuntimeException(e);
+                info.setText(NO_NEXT_STEP);
+                nextStepButton.setDisable(true);
             }
         });
 
@@ -122,20 +126,17 @@ public class Columbus extends Application {
 
             if (path == null || !routeHandler.displayPath(path)){
                 info.setText("Could not find path.");
-            }
-
-
-            /*try {
+            } else {
+                try {
                     activeMQConsumer = new ActiveMQConsumer(path.getInstructionQueueId().getValue());
                     nextStepButton.setDisable(false);
                 } catch (JMSException e) {
-                    throw new RuntimeException(e);
-                }*/
-
-
-                /*var route = path.getItineraries().getValue().getItinerary().get(0).getRoutes().getValue().getRoute().get(0).getGeometry().getValue();
-                System.out.println(route);
-                webEngine.executeScript("setRoute(\"" + route.replaceAll("\\\\", "\\\\\\\\") + "\");");*/
+                    nextStepButton.setDisable(true);
+                    info.setText(COULD_NOT_CONNECT_TO_ACTIVEMQ);
+                    System.err.println(COULD_NOT_CONNECT_TO_ACTIVEMQ);
+                    e.printStackTrace();
+                }
+            }
         });
 
         root.add(webView, MAP_W_START, MAP_H_START, MAP_WIDTH, MAP_HEIGHT);

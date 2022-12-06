@@ -33,6 +33,12 @@ public class ActiveMQConsumer implements AutoCloseable {
         Message consumerMessage = messageConsumer.receive(1000);
         TextMessage consumerTextMessage = (TextMessage) consumerMessage;
 
+        if (consumerTextMessage == null){
+            throw new JMSException("No message is available.");
+        }
+
+        System.out.println("Consumed message: " + consumerTextMessage.getText());
+
         return consumerTextMessage.getText();
     }
 
