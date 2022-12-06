@@ -89,8 +89,8 @@ public class Columbus extends Application {
         root.setVgap(GAP);
         root.setHgap(GAP);
 
-        departure = new AddressPane("Departure", cities);
-        arrival = new AddressPane("Arrival", cities);
+        departure = new AddressPane("Departure", "1 Place de la Comédie", cities);
+        arrival = new AddressPane("Arrival", "228 Avenue du Plateau", cities);
         contracts = new ComboBox<>(FXCollections.observableArrayList(contractsList));
         calculate = new Button("Calculate!");
         info = new Label("");
