@@ -8,9 +8,6 @@ For exemple : `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\C
 
 Then you need to run the file `RunServer.bat` as an administrator.
 
-## Importing the WSDL
-First start the server, then run `mvn clean jaxws:wsimport`
-
 ## Starting the client
 To run the client just launch the `RunClient.bat`.
 
