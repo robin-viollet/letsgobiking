@@ -18,7 +18,7 @@ namespace RoutingServer
             numberFormatInfo.NumberDecimalSeparator = ".";
         }
 
-        private int queueId = 0;
+        private static int queueId = 0;
         private ISession session;
 
         private readonly JCDecaux JCDecaux;
@@ -175,6 +175,8 @@ namespace RoutingServer
             // Use the session to target a queue.
             IDestination destination = session.GetQueue("" + (++queueId));
 
+            session.DeleteDestination(destination);
+
             // Create a Producer targetting the selected queue.
             IMessageProducer producer = session.CreateProducer(destination);
             // You may configure everything to your needs, for instance:
@@ -196,7 +198,7 @@ namespace RoutingServer
 
             producer.Close();
 
-            return "" + this.queueId;
+            return "" + queueId;
         }
 
         private String GetCoordinatesString(GeoCoordinate geoCoordinate)
