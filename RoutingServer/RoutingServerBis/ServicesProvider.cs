@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
@@ -174,6 +174,8 @@ namespace RoutingServer
         {
             // Use the session to target a queue.
             IDestination destination = session.GetQueue("" + (++queueId));
+
+            session.DeleteDestination(destination);
 
             // Create a Producer targetting the selected queue.
             IMessageProducer producer = session.CreateProducer(destination);
