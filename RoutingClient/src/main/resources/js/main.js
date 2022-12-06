@@ -1,31 +1,7 @@
-// var map = new ol.Map("Map");
-//
-var fromProjection = new ol.proj.Projection('EPSG:4326'); // Transform from WGS 1984
-var toProjection = new ol.proj.Projection('EPSG:900913'); // to Spherical Mercator Projection
-// var zoom = 13;
-
-/*var route = new ol.Geometry.Polyline({
-    factor: 1e6
-}).readGeometry("ghrlHkr~s@?DICqELI?IAsCi@ICKAuA_@i@GSA?_@?M?eA?S?W?S@wB@k@?U@{H?MI@I@u@FkBPwBTcALI@?M[mGAMC?B?KiB?KAM[aFASg@sI?CmAt@y@f@?BVlELpC", {
-    dataProjection: 'EPSG:4326',
-    featureProjection: 'EPSG:3857'
+const view = new ol.View({
+    center: [0, 0],
+    zoom: 2,
 });
-
-var routeFeature = new ol.Feature({
-    type: 'route',
-    geometry: route
-});
-
-var vectorLayer = new ol.layer.VectorLayer({
-    source: new ol.source.Vector({
-        features: [routeFeature]
-    })
-})
-
-this.map.addLayer(vectorLayer);*/
-
-// var mapnik = new ol.source.OSM();
-// map.addLayer(mapnik);
 
 const map = new ol.Map({
     target: 'map',
@@ -34,61 +10,119 @@ const map = new ol.Map({
             source: new ol.source.OSM(),
         }),
     ],
-    view: new ol.View({
-        center: [0, 0],
-        zoom: 2,
-    }),
+    view: view,
 });
-function setRoute(path) {
+
+const styles = {
+    'routeW': new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            width: 6,
+            color: [237, 212, 0, 0.8],
+        }),
+    }),
+    'routeB': new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            width: 6,
+            color: [212, 237, 0, 0.8],
+        }),
+    }),
+    'start': new ol.style.Style({
+        image: new ol.style.Icon({
+            anchor: [0.5, 1],
+            src: 'https://openlayers.org/en/main/examples/data/geolocation_marker_heading.png',
+        }),
+    }),
+    'end': new ol.style.Style({
+        image: new ol.style.Icon({
+            anchor: [0.5, 1],
+            rotation: Math.PI,
+            src: 'https://openlayers.org/en/main/examples/data/geolocation_marker_heading.png',
+        }),
+    }),
+    'station': new ol.style.Style({
+        image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({color: 'black'}),
+            stroke: new ol.style.Stroke({
+                color: 'white',
+                width: 2,
+            }),
+        }),
+    })
+};
+
+const vectorLayer = new ol.layer.Vector({
+    style: function (feature) {
+        return styles[feature.get('type')];
+    }
+});
+
+const vector = new ol.source.Vector({
+    features: []
+});
+
+vectorLayer.setSource(vector);
+
+map.addLayer(vectorLayer);
+
+function addRoute(path, start, end){
+    const features = [];
+
     const route = new ol.format.Polyline({
         factor: 1e5,
         geometryLayout: 'XY'
     }).readGeometry(path, {
         dataProjection: 'EPSG:4326',
         featureProjection: 'EPSG:3857'
-    })/*.transform(fromProjection, toProjection)*/;
+    });
 
     const routeFeature = new ol.Feature({
-        type: 'route',
+        type: start || end ? 'routeW' : 'routeB',
         geometry: route
     });
 
+    features.push(routeFeature)
+
+    console.log(route);
+
     map.getView().fit(route);
 
-    /*
-    const styles = {
-        'route': new ol.style.Style({
-            stroke: new ol.style.Stroke({
-                width: 6,
-                color: [237, 212, 0, 0.8],
-            }),
-        }),
-        'icon': new ol.style.Style({
-            image: new ol.style.Icon({
-                anchor: [0.5, 1],
-                src: 'https://openlayers.org/en/main/examples/data/icon.png',
-            }),
-        }),
-        'geoMarker': new ol.style.Style({
-            image: new ol.style.Circle({
-                radius: 7,
-                fill: new ol.style.Fill({color: 'black'}),
-                stroke: new ol.style.Stroke({
-                    color: 'white',
-                    width: 2,
-                }),
-            }),
-        }),
-    };*/
+    if (start){
+        const startMarker = new ol.Feature({
+            type: 'start',
+            geometry: new ol.geom.Point(route.getCoordinateAt(0)),
+        });
 
-    const vectorLayer = new ol.layer.Vector({
-        source: new ol.source.Vector({
-            features: [routeFeature]
-        })/*,
-    style: function (feature) {
-        return styles[feature.get('type')];
-    }*/
-    });
+        features.push(startMarker);
 
-    map.addLayer(vectorLayer);
+    } else if (end){
+
+        const endMarker = new ol.Feature({
+            type: 'end',
+            geometry: new ol.geom.Point(route.getCoordinateAt(1)),
+        });
+
+        features.push(endMarker)
+    } else {
+        const startMarker = new ol.Feature({
+            type: 'station',
+            geometry: new ol.geom.Point(route.getCoordinateAt(0)),
+        });
+
+        features.push(startMarker);
+
+        const endMarker = new ol.Feature({
+            type: 'station',
+            geometry: new ol.geom.Point(route.getCoordinateAt(1)),
+        });
+
+        features.push(endMarker)
+    }
+
+    vector.addFeatures(features);
+}
+
+function clearRoute(){
+    map.setView(view);
+    vector.clear();
 }

@@ -1,7 +1,8 @@
 package com.soc.testwsclient;
 
-import com.soap.ws.client.generated.*;
-import com.soc.testwsclient.actions.CalculateButtonAction;
+import com.soap.ws.client.generated.Contract;
+import com.soap.ws.client.generated.IServices;
+import com.soap.ws.client.generated.ServicesProvider;
 import com.soc.testwsclient.actions.ContractsListener;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -104,11 +105,6 @@ public class Columbus extends Application {
         contracts.setConverter(new ContractConverter(contractsList));
         contracts.valueProperty().addListener(new ContractsListener(cities, departure, arrival));
         contracts.getSelectionModel().selectFirst();
-
-//        calculate.setOnAction(new CalculateButtonAction(
-//                serverServices,
-//                webEngine, info,
-//                departure, arrival));
 
         RouteHandler routeHandler = new RouteHandler(webEngine);
 
