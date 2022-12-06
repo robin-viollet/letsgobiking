@@ -1,5 +1,5 @@
-cd RoutingClient\
+cd .\RoutingClient\
 rd -r .\src\main\java\com\soap\
-mvn clean jaxws:wsimport
-mvn package
-mvn exec:java
+call mvn clean jaxws:wsimport
+call mvn package
+call mvn exec:java
