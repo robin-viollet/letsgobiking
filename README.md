@@ -13,3 +13,11 @@ First start the server, then run `mvn clean jaxws:wsimport`
 
 ## Starting the client
 To run the client just launch the `RunClient.bat`.
+
+## Testing the client
+
+Here are some addresses to test the client:
+### Lyon contract
+- 1 Place de la Comédie, Lyon
+- 228 Avenue du Plateau, Lyon
+- 15 Bd André Latarjet, Villeurbanne
