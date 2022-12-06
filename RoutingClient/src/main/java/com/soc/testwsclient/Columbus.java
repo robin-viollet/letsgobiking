@@ -158,6 +158,11 @@ public class Columbus extends Application {
         Scene scene = new Scene(root);
         scene.addEventHandler(KeyEvent.KEY_PRESSED, t -> {
             if(t.getCode()== KeyCode.ESCAPE){
+                try {
+                    activeMQConsumer.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 System.exit(0);
             }
         });
