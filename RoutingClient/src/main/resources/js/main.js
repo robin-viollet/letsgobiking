@@ -83,11 +83,9 @@ function addRoute(path, start, end){
 
     features.push(routeFeature)
 
-    console.log(route);
-
-    map.getView().fit(route);
-
     if (start){
+        map.getView().fit(route);
+
         const startMarker = new ol.Feature({
             type: 'start',
             geometry: new ol.geom.Point(route.getCoordinateAt(0)),
