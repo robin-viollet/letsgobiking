@@ -173,7 +173,7 @@ namespace RoutingServer
         private String CreateQueueWithInstructions(Itinerary[] itineraries)
         {
             // Use the session to target a queue.
-            IDestination destination = session.GetQueue("" + queueId);
+            IDestination destination = session.GetQueue("" + (++queueId));
 
             // Create a Producer targetting the selected queue.
             IMessageProducer producer = session.CreateProducer(destination);
@@ -196,7 +196,7 @@ namespace RoutingServer
 
             producer.Close();
 
-            return "" + (++this.queueId);
+            return "" + this.queueId;
         }
 
         private String GetCoordinatesString(GeoCoordinate geoCoordinate)
