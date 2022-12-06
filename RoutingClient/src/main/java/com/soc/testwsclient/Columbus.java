@@ -1,6 +1,8 @@
 package com.soc.testwsclient;
 
 import com.soap.ws.client.generated.*;
+import com.soc.testwsclient.actions.CalculateButtonAction;
+import com.soc.testwsclient.actions.ContractsListener;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +27,7 @@ public class Columbus extends Application {
 
     private static final int MAP_W_START = 0;
     private static final int MAP_H_START = 0;
-    private static final int MAP_WIDTH = 6;
+    private static final int MAP_WIDTH = 9;
     private static final int MAP_HEIGHT = 2;
     private static final int DEPARTURE_W_START = 0;
     private static final int DEPARTURE_H_START = MAP_H_START + MAP_HEIGHT;
@@ -42,11 +44,14 @@ public class Columbus extends Application {
     private static final int CALCULATE_W_START = CONTRACTS_W_START + CONTRACTS_WIDTH;
     private static final int CALCULATE_H_START = DEPARTURE_H_START;
 
+    private GridPane root;
     private AddressPane departure;
     private AddressPane arrival;
     private ComboBox<Contract> contracts;
     private Button calculate;
     private Label info;
+    private Label nextStep;
+    private Button nextStepButton;
 
     public static void main(String[] args) {
         launch(args);
@@ -71,7 +76,7 @@ public class Columbus extends Application {
             webEngine.load(mainPage.toURI().toURL().toString());
         }
 
-        GridPane root = new GridPane();
+        root = new GridPane();
 
         root.setVgap(GAP);
         root.setHgap(GAP);
@@ -80,38 +85,20 @@ public class Columbus extends Application {
         arrival = new AddressPane("Arrival", cities);
         contracts = new ComboBox<>(FXCollections.observableArrayList(contractsList));
         calculate = new Button("Calculate!");
-        info = new Label();
+        info = new Label("");
+        nextStep = new Label("No next step.");
+        nextStepButton = new Button("Next Step");
+
+        nextStepButton.setDisable(true);
 
         contracts.setConverter(new ContractConverter(contractsList));
-        contracts.valueProperty().addListener((observableValue, oldContract, newContract) -> {
-            cities.clear();
-            ArrayOfstring contratCities = newContract.getCities().getValue();
-
-            if (contratCities != null) {
-                cities.addAll(contratCities.getString());
-                departure.selectFirstCity();
-                arrival.selectFirstCity();
-            }
-        });
+        contracts.valueProperty().addListener(new ContractsListener(cities, departure, arrival));
         contracts.getSelectionModel().selectFirst();
 
-        calculate.setOnAction(actionEvent -> {
-            info.setText("");
-            Location startLocation = departure.toLocation();
-            Location endLocation = arrival.toLocation();
-
-            System.out.println(startLocation);
-            System.out.println(endLocation);
-            var path = serverServices.getBestPath(startLocation, endLocation);
-
-            if (path != null) {
-                var route = path.getRoutes().getValue().getRoute().get(0).getGeometry().getValue();
-                System.out.println(route);
-                webEngine.executeScript("setRoute(\"" + route.replaceAll("\\\\", "\\\\\\\\") + "\");");
-            } else {
-                info.setText("Could not find path.");
-            }
-        });
+        calculate.setOnAction(new CalculateButtonAction(
+                serverServices,
+                webEngine, info,
+                departure, arrival));
 
         root.add(webView, MAP_W_START, MAP_H_START, MAP_WIDTH, MAP_HEIGHT);
         root.add(departure, DEPARTURE_W_START, DEPARTURE_H_START, DEPARTURE_WIDTH, DEPARTURE_HEIGHT);
@@ -119,9 +106,15 @@ public class Columbus extends Application {
         root.add(contracts, CONTRACTS_W_START, CONTRACTS_H_START, CONTRACTS_WIDTH, CONTRACTS_HEIGHT);
         root.add(calculate, CALCULATE_W_START, CALCULATE_H_START);
         root.add(info, CALCULATE_W_START + 1, CALCULATE_H_START);
+        root.add(nextStep, MAP_W_START, CALCULATE_H_START + 1);
+        root.add(nextStepButton, CALCULATE_W_START + 2, CALCULATE_H_START + 1);
 
-        GridPane.setMargin(departure, new Insets(GAP));
-        GridPane.setMargin(arrival, new Insets(GAP));
+        Insets margin = new Insets(GAP);
+
+        GridPane.setMargin(departure, margin);
+        GridPane.setMargin(arrival, margin);
+        GridPane.setMargin(nextStep, margin);
+        GridPane.setMargin(nextStepButton, margin);
 
         Scene scene = new Scene(root);
         scene.addEventHandler(KeyEvent.KEY_PRESSED, t -> {

@@ -38,7 +38,6 @@ public class AddressPane extends GridPane {
     }
 
     public void selectFirstCity(){
-//        city.s
         city.getSelectionModel().selectFirst();
     }
 
