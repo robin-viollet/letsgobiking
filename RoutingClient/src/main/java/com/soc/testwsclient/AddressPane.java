@@ -7,6 +7,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class AddressPane extends GridPane {
     private final Label label;
@@ -22,6 +24,9 @@ public class AddressPane extends GridPane {
         this.cityLabel = new Label("City:");
         this.city = new ComboBox<>(cities);
 
+        Font defaultFont = Font.getDefault();
+
+        this.label.setFont(Font.font(defaultFont.getName(), FontWeight.BOLD, defaultFont.getSize()));
         this.city.getSelectionModel().selectFirst();
         this.street.setPromptText(promptStreet);
 
