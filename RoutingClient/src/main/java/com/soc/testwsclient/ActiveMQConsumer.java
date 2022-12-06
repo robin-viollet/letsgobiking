@@ -1,6 +1,5 @@
 package com.soc.testwsclient;
 
-import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.Connection;
