@@ -14,7 +14,7 @@ namespace ProxyCache
 
         public List<Station> GetStationsFromContract(string contractName)
         {
-            return genericProxyCache.Get<JCDecauxStationsItem>(contractName).GetItemContent();
+            return genericProxyCache.Get<JCDecauxStationsItem>(contractName, 120).GetItemContent();
         }
     }
 }
